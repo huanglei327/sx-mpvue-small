@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/counter/main",
+    "pages/shop/shopdetails/main",
+    "pages/classify/index/main",
+    "pages/commodity/index/main",
+    "pages/commodity/details/main",
+    "pages/cart/index/main",
+    "pages/user/index/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#d4237a",
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "text": "首页",
+        "iconPath": "static/images/tabbar/icon-home-a.png",
+        "selectedIconPath": "static/images/tabbar/icon-home-b.png"
+      },
+      {
+        "pagePath": "pages/classify/index/main",
+        "text": "分类",
+        "iconPath": "static/images/tabbar/icon-search-a.png",
+        "selectedIconPath": "static/images/tabbar/icon-search-b.png"
+      },
+      {
+        "pagePath": "pages/cart/index/main",
+        "text": "购物车",
+        "iconPath": "static/images/tabbar/icon-shop-a.png",
+        "selectedIconPath": "static/images/tabbar/icon-shop-b.png"
+      },
+      {
+        "pagePath": "pages/user/index/main",
+        "text": "个人",
+        "iconPath": "static/images/tabbar/icon-user-a.png",
+        "selectedIconPath": "static/images/tabbar/icon-user-b.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-button": "../static/vant/button/index",
+    "van-notify": "../static/vant/notify/index",
+    "van-row": "../static/vant/row/index",
+    "van-col": "../static/vant/col/index",
+    "van-icon": "../static/vant/icon/index",
+    "van-popup": "../static/vant/popup/index",
+    "van-badge": "../static/vant/badge/index",
+    "van-badge-group": "../static/vant/badge-group/index",
+    "van-tab": "../static/vant/tab/index",
+    "van-tabs": "../static/vant/tabs/index",
+    "van-goods-action": "../static/vant/goods-action/index",
+    "van-goods-action-icon": "../static/vant/goods-action-icon/index",
+    "van-goods-action-button": "../static/vant/goods-action-button/index",
+    "van-cell": "../static/vant/cell/index",
+    "van-cell-group": "../static/vant/cell-group/index"
+  }
+}

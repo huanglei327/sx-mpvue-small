@@ -1,0 +1,346 @@
+{
+    "errorCode": "0",
+    "errorMessage": "成功",
+    "data": {
+        "focus": [
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 0,
+                "type": 3,
+                "content": "/pages/webview/index?url=https%3A%2F%2Fact.you.163.com%2Fact%2Fpub%2FzJSFsEuTcM.html"
+            },
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 1,
+                "type": 3,
+                "content": "/pages/webview/index?url=https%3A%2F%2Fm.you.163.com%2Ftopic%2Fv1%2Fpub%2FAzx54lvdgQ.html"
+            },
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 2,
+                "type": 3,
+                "content": "/pages/webview/index?url=https%3A%2F%2Fm.you.163.com%2Ftopic%2Fv1%2Fpub%2F975DnRVmye.html"
+            },
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 3,
+                "type": 3,
+                "content": "/pages/webview/index?url=https%3A%2F%2Fm.you.163.com%2Ftopic%2Fv1%2Fpub%2FMZee3MWrbs.html"
+            },
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 4,
+                "type": 2,
+                "content": "activation_68_1546271999000"
+            },
+            {
+                "img": "https://yanxuan.nosdn.127.net/b7c272ad2229dda95024a68b4e67c959.png",
+                "rank": 6,
+                "type": 3,
+                "content": "/pages/webview/index?url=https%3A%2F%2Fm.you.163.com%2Ftopic%2Fv1%2Fpub%2FKrlDMhMkWb.html"
+            }
+        ],
+        "popularItems": {
+            "hasMore": false,
+            "itemList": [
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png",
+                    "simpleDesc": "热销5万+条，一条被子过冬",
+                    "limitedFlag": true,
+                    "itemTagList": [
+                        {
+                            "itemTag": "TE_JIA_LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "严选明星日",
+                            "type": 102
+                        },
+                        {
+                            "itemTag": "MULTI__LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "满赠",
+                            "type": 103
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "activityPrice": "919.00",
+                    "simpleDescClose": false,
+                    "specTag": "特价",
+                    "few": false,
+                    "id": 1630007,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 1149.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png",
+                    "limitedTag": "严选明星日",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1535426105838,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "升级款95%白鹅绒秋冬加厚羽绒被",
+                    "productPlace": "",
+                    "retailPrice": 1149.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/362a8249b48d91d99604680b5471b507.png",
+                    "simpleDesc": "肩颈部位全方位按摩放松",
+                    "limitedFlag": true,
+                    "itemTagList": [
+                        {
+                            "itemTag": "TE_JIA_LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "三石福利价",
+                            "type": 102
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "activityPrice": "385.00",
+                    "simpleDescClose": false,
+                    "specTag": "特价",
+                    "few": false,
+                    "id": 1624001,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 449.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/362a8249b48d91d99604680b5471b507.png",
+                    "limitedTag": "三石福利价",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1527940142210,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "网易智造3D揉捏按摩肩带",
+                    "productPlace": "",
+                    "retailPrice": 449.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/576e610c3fa88421a4c20e49f518770b.png",
+                    "simpleDesc": "公蟹4两*4只+母蟹3两*4只",
+                    "limitedFlag": true,
+                    "itemTagList": [
+                        {
+                            "itemTag": "XIAN_SHI_LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "限时购",
+                            "type": 107
+                        },
+                        {
+                            "itemTag": "MULTI__LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "加价购",
+                            "type": 103
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "activityPrice": "925.00",
+                    "simpleDescClose": false,
+                    "specTag": "限时购",
+                    "few": false,
+                    "id": 3387011,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 1088.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/576e610c3fa88421a4c20e49f518770b.png",
+                    "limitedTag": "限时购",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1535102339821,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "阳澄湖大闸蟹 提货券（券面价格1298）",
+                    "productPlace": "",
+                    "retailPrice": 1088.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/2eb0624b89d2cce1a5fb13187a0c10d8.jpg",
+                    "simpleDesc": "超柔针织棉，亲肤可裸睡",
+                    "limitedFlag": true,
+                    "itemTagList": [
+                        {
+                            "itemTag": "TE_JIA_LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "严选明星日",
+                            "type": 102
+                        },
+                        {
+                            "itemTag": "MULTI__LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "满赠",
+                            "type": 103
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "activityPrice": "269.00",
+                    "simpleDescClose": false,
+                    "specTag": "特价",
+                    "few": false,
+                    "id": 1110003,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 299.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/2eb0624b89d2cce1a5fb13187a0c10d8.jpg",
+                    "specification": "5色可选",
+                    "limitedTag": "严选明星日",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1484791030883,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "全棉针织条纹四件套 新款",
+                    "productPlace": "",
+                    "retailPrice": 299.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/fe4e59525626df83d3875e45a1ad05fc.png",
+                    "simpleDesc": "40升适中容量 铝质包角 牢固抗摔",
+                    "limitedFlag": true,
+                    "itemTagList": [
+                        {
+                            "itemTag": "XIAN_SHI_LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "限时购",
+                            "type": 107
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "activityPrice": "296.70",
+                    "simpleDescClose": false,
+                    "specTag": "限时购",
+                    "few": false,
+                    "id": 1085019,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 349.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/fe4e59525626df83d3875e45a1ad05fc.png",
+                    "specification": "9色可选",
+                    "limitedTag": "限时购",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1478069202635,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "20寸 纯PC“铝框”（非全铝）登机箱",
+                    "productPlace": "",
+                    "retailPrice": 349.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/b532f2f441572242333f6c5b92fc9f10.png",
+                    "simpleDesc": "浓缩精炖，进口燕条",
+                    "limitedFlag": false,
+                    "itemTagList": [
+                        {
+                            "itemTag": "MULTI__LIST",
+                            "itemTagType": "ACTIVITY",
+                            "name": "加价购",
+                            "type": 103
+                        }
+                    ],
+                    "saleVolume": 0,
+                    "simpleDescClose": false,
+                    "few": false,
+                    "id": 1398016,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 328.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/b532f2f441572242333f6c5b92fc9f10.png",
+                    "limitedTag": "",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1512560183273,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "浓缩即食燕窝 70克*3瓶 99%",
+                    "productPlace": "",
+                    "retailPrice": 328.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/73a065d6fc8c32197b54421808c54788.png",
+                    "simpleDesc": "免费安装，即热恒温、暖风烘干、自动除臭",
+                    "limitedFlag": false,
+                    "itemTagList": [],
+                    "saleVolume": 0,
+                    "simpleDescClose": false,
+                    "few": false,
+                    "id": 1497001,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 1599.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/73a065d6fc8c32197b54421808c54788.png",
+                    "limitedTag": "",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1521165457858,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "智能马桶盖",
+                    "productPlace": "",
+                    "retailPrice": 1599.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                },
+                {
+                    "listPicUrl": "https://yanxuan.nosdn.127.net/e5474a8f4fd5748079e2ba2ead806b51.png",
+                    "simpleDesc": "累计销量百万，洁齿必备基础款",
+                    "limitedFlag": false,
+                    "itemTagList": [],
+                    "saleVolume": 0,
+                    "simpleDescClose": false,
+                    "few": false,
+                    "id": 1127007,
+                    "unShelf": false,
+                    "forSale": false,
+                    "last": false,
+                    "extraPrice": "",
+                    "primaryRetailPriceCopy": 129.00,
+                    "primaryPicUrl": "https://yanxuan.nosdn.127.net/e5474a8f4fd5748079e2ba2ead806b51.png",
+                    "limitedTag": "",
+                    "soldOut": false,
+                    "limitedSingleProm": false,
+                    "onSaleTime": 1491474323105,
+                    "newOnShelf": false,
+                    "promotionFlag": 0,
+                    "name": "日式和风声波式电动牙刷（可单买刷头）",
+                    "productPlace": "",
+                    "retailPrice": 129.00,
+                    "appExclusiveFlag": false,
+                    "categoryId": 0,
+                    "accessTime": 0
+                }
+            ],
+            "title": "人气推荐"
+        }
+    }
+}
