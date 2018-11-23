@@ -12,17 +12,42 @@ export default {
 </script>
 
 <style lang="less">
+@import './common/css/index.less';
 page {
-  //background: #f0f0f0;
+  background: #efefef;
+}
+.coloe3 {
+  color: #333;
+}
+.color6 {
+  color: #666;
+  font-size: 12px
+}
+.color9 {
+  color: #999;
+}
+.ec-color {
+  color: #ececec;
+}
+.ef-color {
+  color: #efefef;
+}
+.price-color {
+  color: #a42d39;
+}
+.s-price{
+  color: #a42d39;
+  font-size: 16px;
 }
 .container {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  color: #1c2438;
+  color: @3-color;
   font-size: 14px;
 }
 /* this rule will be remove */
@@ -36,7 +61,7 @@ page {
 .d-space {
   width: 100%;
   height: 10px;
-  background: #f5f5f5;
+  background: #efefef;
   clear: both;
 }
 .title-name {
@@ -48,7 +73,7 @@ page {
 .s-p-step {
   .inputClass {
     width: 28px;
-    height: 25px;
+    height: 27px;
     font-size: 12px;
   }
   .plusClass,
@@ -62,32 +87,43 @@ page {
     height: 50px;
   }
   .buttonClass {
-    height: 50px;
-    line-height: 50px;
+    height: 46px;
+    line-height: 46px;
+  }
+  .customClass{
+    height: 45px;
   }
 }
- .main-title {
-    margin: 0 15px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 16px;
-    position: relative;
-   
-    .right {
-       color: #999;
-      display: flex;
-      font-size: 14px;
-      line-height: 45px;
-      text-align: right;
-      color: #1d3f14;
-      position: absolute;
-      right: 10rpx;
-      top: 0;
-      .u-icon {
-        height: 20px;
-        padding-top: 4rpx;
-        font-size: 11px;
-      }
+.main-title {
+  margin: 0 15px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  position: relative;
+
+  .right {
+    display: flex;
+    font-size: 14px;
+    line-height: 45px;
+    text-align: right;
+    position: absolute;
+    right: 10rpx;
+    top: 0;
+    .u-icon {
+      height: 20px;
+      padding-top: 4rpx;
+      font-size: 11px;
     }
   }
+}
+.cart-vantag {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  //font-size: 12px;
+}
+.cart-sub {
+  display: flex;
+  padding: 0 15px;
+}
 </style>

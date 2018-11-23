@@ -8,7 +8,11 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     ssxxCart: getStore(),
-    userInfo: {}
+    userInfo: {},
+    min: 1,
+    max: 10,
+    systemInfo: getSystemInfo(),
+    searchValues: getSearchValues()
   },
   getters: {
     getCartNum: state => {
@@ -19,6 +23,17 @@ const store = new Vuex.Store({
     },
     getUsers: state => {
       return state.userInfo
+    },
+    //获取选中的商品数量
+    getValidCartNum: state => {
+      var cnum = 0
+      state.ssxxCart.forEach(item => {
+        if (item.isSelected) {
+          cnum++
+        }
+      })
+      console.log(cnum)
+      return cnum
     },
     //合计
     getCalculatePrice: state => {
@@ -35,6 +50,21 @@ const store = new Vuex.Store({
 
   },
   mutations: {
+    clearSearchValues(state){
+      state.searchValues=[]
+      wx.removeStorageSync('searchValues')
+    },
+    clearStorage(state) {
+      state.ssxxCart = []
+    },
+    saveSearchValues(state,value){
+      if(state.searchValues.length>9){
+        //删除最后一个
+        state.searchValues.splice(0, 1)
+      }
+      state.searchValues.push(value)
+      wx.setStorageSync('searchValues', JSON.stringify(state.searchValues))
+    },
     saveUserInfo(state, userInfo) {
       state.userInfo = userInfo
       wx.setStorageSync('userInfo', JSON.stringify(state.userInfo))
@@ -82,5 +112,23 @@ function getStore() {
   else {
     return []
   }
+}
+function getSearchValues(){
+  var obj = wx.getStorageSync('searchValues')
+  if (obj) {
+    return JSON.parse(obj)
+  }
+  else {
+    return []
+  }
+}
+function getSystemInfo() {
+  var obj = {}
+  wx.getSystemInfo({
+    success(res) {
+      obj = res
+    }
+  })
+  return obj
 }
 export default store;

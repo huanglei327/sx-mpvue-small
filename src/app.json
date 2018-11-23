@@ -5,10 +5,13 @@
     "pages/counter/main",
     "pages/shop/shopdetails/main",
     "pages/classify/index/main",
+    "pages/classify/search/main",
     "pages/commodity/index/main",
     "pages/commodity/details/main",
     "pages/cart/index/main",
-    "pages/user/index/main"
+    "pages/cart/confirm/main",
+    "pages/user/index/main",
+    "pages/user/order/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -56,9 +59,6 @@
     "van-badge-group": "../static/vant/badge-group/index",
     "van-tab": "../static/vant/tab/index",
     "van-tabs": "../static/vant/tabs/index",
-    "van-goods-action": "../static/vant/goods-action/index",
-    "van-goods-action-icon": "../static/vant/goods-action-icon/index",
-    "van-goods-action-button": "../static/vant/goods-action-button/index",
     "van-cell": "../static/vant/cell/index",
     "van-cell-group": "../static/vant/cell-group/index"
   }

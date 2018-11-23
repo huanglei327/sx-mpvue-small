@@ -42,7 +42,7 @@
     <div style="z-index:101;">
       <van-goods-action>
         <van-goods-action-icon icon="chat" text="客服" />
-        <van-goods-action-icon icon="cart" text="购物车" @click="$common.openTabbar('/pages/cart/index/main')" :info="ssxxCart>0?ssxxCart:''" />
+        <van-goods-action-icon icon="cart" text="购物车" @click="$common.reLaunch('/pages/cart/index/main')" :info="ssxxCart>0?ssxxCart:''" />
         <van-goods-action-icon icon="shop" text="店铺" />
         <van-goods-action-button text="加入购物车" type="warning" size="small" @click="SaveShopCart" />
         <van-goods-action-button text="立即购买" size="mini" />
@@ -168,8 +168,6 @@ export default {
         that.show = !that.show
       } else {
         if (this.checkDetails()) {
-          console.log(JSON.stringify(that.tempCart))
-          console.log(that.skuInfo)
           var isTrue = false
           that.tempCart.forEach((item, index) => {
             if (
@@ -182,8 +180,10 @@ export default {
             }
           })
 
-          if (isTrue) this.$store.commit('upCart', that.skuInfo)
-          else {
+          if (isTrue) {
+            this.$store.commit('upCart', that.skuInfo)
+          } else {
+            that.skuInfo.shopNumber = that.shopNumber
             this.$store.commit('addCart', that.skuInfo)
           }
         }
@@ -276,6 +276,7 @@ export default {
 </script>
 
 <style lang="less">
+@import '../../../common/css/index.less';
 .wxParse {
   view {
     margin-top: -3px;
@@ -302,6 +303,7 @@ export default {
 .dt-main {
   width: 100%;
   padding: 0 15px;
+  background: white;
   .dt-name {
     width: 100%;
     display: flex;
@@ -328,10 +330,10 @@ export default {
     height: 30px;
     line-height: 30px;
     .dx-4 {
-      color: #a42d39;
+      color: @price-color;
     }
     .dt-p {
-      color: #a42d39;
+      color: @price-color;
       font-size: 20px;
       font-weight: 600;
     }
@@ -378,7 +380,7 @@ export default {
         -webkit-box-orient: vertical;
       }
       .c {
-        color: #a42d39;
+        color: @price-color;
         font-size: 18px;
       }
     }
@@ -402,13 +404,13 @@ export default {
 .isSelected {
   float: left;
   padding: 10px 15px;
-  background: #a42d39;
+  background: @price-color;
   margin: 0 10px 10px 0;
   color: white;
 }
 .detailsPopup {
   .van-popup--bottom {
-    margin-bottom: 50px;
+    margin-bottom: 45px;
   }
 }
 </style>

@@ -5,8 +5,9 @@
       wx:else
       name="success"
       class="{{ iconClass }}"
+      style="{{ iconStyle }}"
       custom-class="icon-class"
-      custom-style="line-height: 18px;"
+      custom-style="line-height: 20px;"
     />
   </view>
   <view class="van-checkbox__label van-checkbox__label--{{ labelPosition }} label-class" bindtap="onClickLabel">

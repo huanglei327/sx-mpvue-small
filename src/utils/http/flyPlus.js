@@ -1,6 +1,6 @@
 import Fly from 'flyio/dist/npm/wx'
 const fly = new Fly()
-//const host = 'http://172.17.233.33'
+//const host = 'http://172.17.233.223'
 const host ='https://duoduoday.top'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
@@ -8,9 +8,8 @@ fly.interceptors.request.use((request) => {
         title: '加载中',
         mask: true
     })
-    console.log(request)
-    // request.headers["X-Tag"] = "flyio";
-    // request.headers['content-type']= 'application/json';
+    request.headers["X-Tag"] = "flyio";
+    request.headers['content-type']= 'application/json';
     // request.headers = {
     //     'content-type': 'application/x-www-form-urlencoded'
     // }
@@ -40,6 +39,7 @@ fly.interceptors.request.use((request) => {
 fly.interceptors.response.use(
     (response) => {
         wx.hideLoading()
+        console.log(response.data)
         return response.data // 请求成功之后将返回值返回
     },
     (err) => {

@@ -29,3 +29,21 @@ export function SaveOrderInfoApi(param){
   const apiName='/api/order/checkout'
   return post(apiName,param)
 }
+
+//下订单
+export function SaveOrdersApi(param){
+  const apiName ='/api/order/submit'
+  return post(apiName,param)
+}
+
+//查询订单
+export function GetOderListApi(param){
+  const apiName ='/api/order/list'
+  return post(apiName,param)
+}
+
+//查询订单详情
+export function GetOrderDeatils(param){
+  const apiName='/api/order/detail'
+  return post(apiName,param)
+}

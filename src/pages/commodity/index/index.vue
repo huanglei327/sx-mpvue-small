@@ -1,10 +1,14 @@
 <template>
   <div class="container">
+    <div class="c-search" @click="$common.openWin('/pages/classify/search/main')">
+      <van-search placeholder="请输入搜索关键词" background="#f5f5f5" />
+    </div>
     <div class="c-main">
       <div class="c-content" v-for="(item,index) in goodsList" :key="index">
         <div class="c-single" @click="GoDetails(item)">
           <div class="c-img">
-            <image :src="item.listPicUrl" />
+            <image :src="item.listPicUrl" mode="widthFix" />
+             
           </div>
           <div class="c-name">{{item.name}}</div>
           <div class="c-price">￥{{item.retailPrice}}</div>
@@ -21,7 +25,8 @@ export default {
   data() {
     return {
       goodsList: [],
-      obj: {}
+      obj: {},
+      images:{}
     }
   },
   methods: {
@@ -36,7 +41,7 @@ export default {
       GetGoodsListApi(param).then(c)
     },
     GoDetails(item) {
-      const url = '../details/main?goodsId='+item.id
+      const url = '../details/main?goodsId=' + item.id
       wx.navigateTo({ url })
     }
   },
@@ -52,6 +57,11 @@ export default {
 </script>
 
 <style scoped lang="less">
+.c-search{
+  height: 50px;
+  width: 100%;
+  background: white;
+}
 .c-main {
   width: 100%;
 

@@ -71,108 +71,108 @@ export default {
 
 <style lang="less">
 .section {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .left {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 90px;
-	background: #f6f6f6;
-	text-align: center;
-	overflow: auto;
-	font-size: 14px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 90px;
+  background: #f6f6f6;
+  text-align: center;
+  overflow: auto;
+  font-size: 14px;
 }
 .left::before {
-	content: '';
-	position: absolute;
-	background: #dcdcdc;
-	right: 0;
-	top: 0;
-	height: 100%;
+  content: '';
+  position: absolute;
+  background: #dcdcdc;
+  right: 0;
+  top: 0;
+  height: 100%;
 }
 .left view.active {
-	background: #fff;
-	position: relative;
-	z-index: 2;
-	border-left: 3px solid red;
-	font-size: 16px;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  border-left: 3px solid red;
+  font-size: 16px;
 }
 .left view {
-	display: block;
-	height: 45px;
-	line-height: 45px;
-	border-bottom: 0px solid #dcdcdc;
-	border-left: 3px solid #f6f6f6;
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  border-bottom: 0px solid #dcdcdc;
+  border-left: 3px solid #f6f6f6;
 }
 .right {
-	margin-left: 90px;
-	height: 100%;
-	overflow: auto;
-	width: auto;
-	background: #fff;
-	padding: 0 10px;
+  margin-left: 90px;
+  height: 100%;
+  overflow: auto;
+  width: auto;
+  background: #fff;
+  padding: 0 10px;
 }
 .right text {
-	font-size: 12px;
+  font-size: 12px;
 }
 .typeTree {
-	padding-top: 10px;
-	width: 100%;
-	.title {
-		width: 100%;
-		height: 30px;
-		border-bottom: 1px solid #999;
-		margin-bottom: 5px;
-		font-size: 14px;
-		line-height: 30px;
-		padding-top: 10px;
-	}
-	.heand {
-		image {
-			width: 100%;
-			height: 100px;
-		}
-	}
+  padding-top: 10px;
+  width: 100%;
+  .title {
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 30px;
+    padding-top: 10px;
+  }
+  .heand {
+    image {
+      width: 100%;
+      height: 100px;
+    }
+  }
 }
 .typeTree .item {
-	text-align: center;
-	display: inline-block;
-	vertical-align: top;
-	font-size: 12px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
 }
 // .typeTree .category {
 // 	clear: both;
 // }
 
 .typeTree .brand {
-	width: 33%;
-	float: left;
-	text-align: center;
-	height: 90px;
-	padding: 5px 0;
+  width: 33%;
+  float: left;
+  text-align: center;
+  height: 90px;
+  padding: 5px 0;
 }
 
 .search-wrap {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	height: 50px;
-	color: #fff;
-	background: white;
-	border-bottom: 1px solid #efefef;
-	font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  background: white;
+  border-bottom: 1px solid #efefef;
+  font-size: 32rpx;
 }
 .search {
-	flex-grow: 1;
-	margin: 7px 12px;
+  flex-grow: 1;
+  margin: 7px 12px;
 }
 .item image {
-	width: 60px;
-	height: 60px;
+  width: 60px;
+  height: 60px;
 }
 </style>

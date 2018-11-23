@@ -12,7 +12,7 @@
         <div class="main-title">
           <div>我的订单</div>
           <div class="right">
-            <div class="u-name"> 全部订单</div>
+            <div class="u-name" @click="$common.openWin('/pages/user/order/main')"> 全部订单</div>
             <div class="u-icon">
               <van-icon name="arrow" />
             </div>
@@ -49,11 +49,11 @@
       <div class="u-c-list">
         <van-cell-group>
           <van-cell title="我的积分" icon="shop" is-link></van-cell>
-          <van-cell title="收货地址" icon="shop" is-link></van-cell>
+          <van-cell title="收货地址" icon="shop" @click="shippinpAddress" is-link></van-cell>
           <van-cell title="足迹" icon="shop" is-link></van-cell>
           <van-cell title="意见反馈" icon="shop" is-link></van-cell>
           <van-cell title="帮助中心" icon="shop" is-link></van-cell>
-          <van-cell title="设置" icon="shop" is-link @click="clearStoreage"></van-cell>
+          <van-cell title="设置" icon="shop" is-link @click="clearStore"></van-cell>
         </van-cell-group>
       </div>
     </div>
@@ -62,9 +62,14 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import { GetOderListApi } from '@/utils/http/api.js'
 export default {
   data() {
-    return {}
+    return {
+      pageNo:1,
+      pageSize:20,
+      orderStatus:1
+    }
   },
   computed: {
     ...mapState({
@@ -75,8 +80,27 @@ export default {
     })
   },
   methods: {
-    clearStoreage() {
+    clearStore() {
+      this.$store.commit('clearStorage')
       wx.clearStorageSync()
+      wx.showToast({
+        title: '清空缓存成功！',
+        icon: 'success',
+        duration: 2000
+      })
+    },
+    shippinpAddress(){
+      const that = this
+      wx.chooseAddress({
+        success(res) {
+          that.userName = res.userName
+          console.log(res.postalCode)
+          that.address =
+            res.provinceName + res.cityName + res.countyName + res.detailInfo
+          console.log(res.nationalCode)
+          that.telNumber = res.telNumber
+        }
+      })
     }
   },
   created() {},

@@ -34,7 +34,7 @@
           <div class="left">
             <image class="imgs" src="https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png" />
           </div>
-          <div class="right">
+          <div class="right color6">
             <div class="p-t-20">
               <div class="n-1">
                 <div>严选明星</div>
@@ -42,7 +42,7 @@
               </div>
               <div class="n-2">升级款白鹅绒秋冬加厚......</div>
               <div class="n-3">热销5万+条，一条被子过冬</div>
-              <div class="n-4">￥1149</div>
+              <div class="n-4 price-color">￥1149</div>
             </div>
           </div>
           <!-- <van-row>
@@ -72,7 +72,7 @@
                   <div>满赠</div>
                 </div>
                 <div class="n-2">{{item.name}}</div>
-                <div class="n-4">￥{{item.primaryRetailPriceCopy}}</div>
+                <div class="n-4 price-color">￥{{item.primaryRetailPriceCopy}}</div>
               </div>
             </div>
           </div>
@@ -203,6 +203,7 @@ export default {
           wx.getUserInfo({
             success: res => {
               this.userInfo = res.userInfo
+              console.log("登陆")
               this.$store.commit('saveUserInfo',res.userInfo)
             }
           })
@@ -282,6 +283,7 @@ export default {
 .d-m {
   width: 100%;
   padding: 0 15px;
+  background: white;
   .title {
     padding: 0 15px;
     height: 40px;
@@ -338,7 +340,7 @@ export default {
         color: #aaa;
       }
       .n-4 {
-        color: #a42d39;
+        
       }
       .brand {
         width: 33%;

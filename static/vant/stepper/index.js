@@ -22,33 +22,6 @@ VantComponent({
       value: 1
     }
   },
-  created() {
-    console.log('page index created', this)
-  },
-  mounted() {
-    console.log('mounted', this)
-  },
-  onLoad() {
-    console.log('page index onLoad', this)
-  },
-  onReady () {
-    console.log('page index onReady', this)
-  },
-  onShow() {
-    console.log('onShow', this)
-  },
-  onUnload() {
-    console.log('onUnload', this)
-  },
-  onHide() {
-    console.log('onHide', this)
-  },
-  watch:{
-      value(value){
-        console.log('-asdadads')
-        return this.minusDisabled()
-      }
-  },
   computed: {
     minusDisabled: function minusDisabled() {
       return this.data.disabled || this.data.value <= this.data.min;
@@ -57,12 +30,7 @@ VantComponent({
       return this.data.disabled || this.data.value >= this.data.max;
     }
   },
-  onShow(){
-    console.log('---1213123')
-    this.minusDisabled()
-  },
   created: function created() {
-    console.log('created', this.data.value)
     this.setData({
       value: this.range(this.data.value)
     });

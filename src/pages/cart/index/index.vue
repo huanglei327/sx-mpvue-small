@@ -4,7 +4,7 @@
       <image src="../../../static/images/nullcart.png" />
       <div>购物车还是空的哦~</div>
       <div>
-        <van-button size="newSmall" @click="$common.openTabbar('/pages/index/main')" type="danger" >去逛逛</van-button>
+        <van-button size="newSmall" @click="$common.openTabbar('/pages/index/main')" type="danger">去逛逛</van-button>
       </div>
     </div>
     <div v-show="ssxxCart.length>0" style="width:100%;">
@@ -24,10 +24,10 @@
               </div>
               <div class="s-p-n">
                 <div class="s-p-p">￥{{item.retailPrice}}</div>
-                <div class="s-p-step" >
-                  <van-stepper   :value="item.number" integer="true" input-class="inputClass" minus-class="minusClass" plus-class="plusClass" min="1" max="10" step="1" @plus="plusCart(item,1)" @minus="minusCart(item,-1)" />
+                <div class="s-p-step">
+                  <van-stepper :value="item.number" integer="true" input-class="inputClass" minus-class="minusClass" plus-class="plusClass" :min="min" :max="max" step="1" @plus="plusCart(item,1)" @minus="minusCart(item,-1)" />
                 </div>
-                <div class="s-p-del" @click="delShopCart(item)">
+                <div class="s-p-del color6" @click="delShopCart(item)">
                   <van-icon name="delete" />
                 </div>
               </div>
@@ -37,7 +37,7 @@
         <div class="d-space"></div>
       </div>
       <div class="vansub">
-        <van-submit-bar price="3050" button-text="提交订单" custom-class="customClass" button-class="buttonClass" @submit="btnSaveOrder">
+        <van-submit-bar button-text="提交订单" custom-class="customClass" button-class="buttonClass" @submit="btnSaveOrder">
           <van-tag class="cart-vantag" type="primary">
             <div class="cart-sub">
               <div style="width:60%;">
@@ -65,24 +65,25 @@ export default {
       value: 1,
       allCheckboc: true,
       checkNum: 0,
-      isTemp:false
+      isTemp: false
     }
-  },
-  watch(){
   },
   computed: {
     ...mapState({
-      ssxxCart: state => state.ssxxCart
+      ssxxCart: state => state.ssxxCart,
+      min: state => {
+        return state.min
+      },
+      max: state => {
+        return state.max
+      }
     }),
     ...mapGetters({
       getCalculatePrice: 'getCalculatePrice',
-      getShopCart:'getShopCart'
+      getShopCart: 'getShopCart'
     })
   },
   methods: {
-    xxgxx(){
-      console.log('bbbbbbbbbbbbbbbbbbbbbbbbb')
-    },
     goIndex() {},
     checkChange(item) {
       const that = this
@@ -107,7 +108,7 @@ export default {
       })
     },
     delShopCart(item) {
-      const that =this
+      const that = this
       wx.showModal({
         title: '',
         content: '确定删除该商品吗',
@@ -142,7 +143,8 @@ export default {
     btnSaveOrder() {
       const that = this
       const c = res => {
-        console.log(res)
+        console.log('---------')
+        that.$commom.openWin('/pages/cart/confirm/main')
       }
       let arr = []
       that.ssxxCart.forEach(item => {
@@ -154,6 +156,14 @@ export default {
           })
         }
       })
+      if (arr.length <= 0) {
+        wx.showToast({
+          title: '请勾选要下单的商品！',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
       const param = {
         cartList: JSON.stringify(arr)
       }
@@ -169,13 +179,17 @@ export default {
     }
     this.allCheckInfo()
   },
-  onHide(){
-    this.isTemp=false
+  onHide() {
+    this.isTemp = false
     console.log('onhide')
   },
   onShow() {
-    this.isTemp=true
-  },
+    console.log('getcurrentpages', getCurrentPages())
+    if (getCurrentPages().length != 0) {
+      //刷新当前页面的数据
+      getCurrentPages()[getCurrentPages().length - 1].onLoad()
+    }
+  }
 }
 </script>
 
@@ -194,6 +208,7 @@ export default {
 }
 .shop-cart {
   width: 100%;
+  background: white;
   .shop-row {
     display: flex;
     height: 110px;
@@ -228,7 +243,6 @@ export default {
           height: 30px;
           line-height: 32px;
           text-align: right;
-          color: #666;
         }
       }
       .s-r-name {
@@ -251,16 +265,5 @@ export default {
       }
     }
   }
-}
-.cart-vantag {
-  width: 100%;
-  background: #f5f5f5;
-  height: 50px;
-  line-height: 50px;
-  font-size: 12px;
-}
-.cart-sub {
-  display: flex;
-  padding: 0 15px;
 }
 </style>
