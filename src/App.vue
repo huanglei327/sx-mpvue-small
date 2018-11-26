@@ -126,4 +126,7 @@ page {
   display: flex;
   padding: 0 15px;
 }
+.panelCust{
+  margin: 5px;
+}
 </style>
