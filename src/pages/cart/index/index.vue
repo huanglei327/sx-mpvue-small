@@ -144,7 +144,7 @@ export default {
       const that = this
       const c = res => {
         console.log('---------')
-        that.$commom.openWin('/pages/cart/confirm/main')
+        that.$common.openWin('/pages/cart/confirm/main')
       }
       let arr = []
       that.ssxxCart.forEach(item => {
@@ -194,18 +194,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.nullCart {
-  text-align: center;
-  width: 100%;
-  image {
-    width: 80%;
-    height: 300px;
-  }
-  view {
-    height: 30px;
-    line-height: 30px;
-  }
-}
+
 .shop-cart {
   width: 100%;
   background: white;

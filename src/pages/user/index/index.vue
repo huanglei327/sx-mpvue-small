@@ -50,7 +50,7 @@
         <van-cell-group>
           <van-cell title="我的积分" icon="shop" is-link></van-cell>
           <van-cell title="收货地址" icon="shop" @click="shippinpAddress" is-link></van-cell>
-          <van-cell title="足迹" icon="shop" is-link></van-cell>
+          <van-cell title="足迹" @click="$common.openWin('/pages/user/footprint/main')" icon="shop" is-link></van-cell>
           <van-cell title="意见反馈" icon="shop" is-link></van-cell>
           <van-cell title="帮助中心" icon="shop" is-link></van-cell>
           <van-cell title="设置" icon="shop" is-link @click="clearStore"></van-cell>

@@ -1,14 +1,11 @@
 <template>
-  <div class="container">
-    <div class="c-search" @click="$common.openWin('/pages/classify/search/main')">
-      <van-search placeholder="请输入搜索关键词" background="#f5f5f5" />
-    </div>
+  <div>
     <div class="c-main">
-      <div class="c-content" v-for="(item,index) in goodsList" :key="index">
-        <div class="c-single" @click="GoDetails(item)">
+      <div class="c-content" v-for="(item,index) in status.footpriintList" :key="index">
+        <div class="c-single" @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)">
           <div class="c-img">
             <image :src="item.listPicUrl" mode="widthFix" />
-             
+
           </div>
           <div class="c-name">{{item.name}}</div>
           <div class="c-price">￥{{item.retailPrice}}</div>
@@ -19,51 +16,25 @@
 </template>
 
 <script>
-import { GetGoodsListApi } from '@/utils/http/api.js'
-
 export default {
-  data() {
-    return {
-      goodsList: [],
-      obj: {},
-      images:{}
-    }
+  props: ['status'],
+  created() {
+    console.log('createed',this.status)
   },
   methods: {
-    GetGoodsList() {
-      const that = this
-      const c = res => {
-        that.goodsList = res
-      }
-      const param = {
-        categoryId: that.obj.classId
-      }
-      GetGoodsListApi(param).then(c)
-    },
     GoDetails(item) {
       const url = '../details/main?goodsId=' + item.id
       wx.navigateTo({ url })
     }
-  },
-
-  created() {},
-  mounted() {
-    const that = this
-    that.obj = that.$common.getUrlPages()
-    console.log(that.obj)
-    that.GetGoodsList()
   }
 }
 </script>
 
-<style scoped lang="less">
-.c-search{
-  height: 50px;
-  width: 100%;
-  background: white;
-}
+<style lang="less">
 .c-main {
   width: 100%;
+font-size:12px;
+
   .c-content {
     float: left;
     width: 50%;

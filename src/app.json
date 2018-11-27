@@ -11,7 +11,8 @@
     "pages/cart/index/main",
     "pages/cart/confirm/main",
     "pages/user/index/main",
-    "pages/user/order/main"
+    "pages/user/order/main",
+    "pages/user/footprint/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

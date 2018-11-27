@@ -43,7 +43,13 @@ export function GetOderListApi(param){
 }
 
 //查询订单详情
-export function GetOrderDeatils(param){
+export function GetOrderDeatilsApi(param){
   const apiName='/api/order/detail'
+  return post(apiName,param)
+}
+
+//足迹
+export function GetFootprintApi(param){
+  const apiName='api/footprint/footprintList'
   return post(apiName,param)
 }

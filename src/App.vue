@@ -129,4 +129,16 @@ page {
 .panelCust{
   margin: 5px;
 }
+.nullCart {
+  text-align: center;
+  width: 100%;
+  image {
+    width: 80%;
+    height: 300px;
+  }
+  view {
+    height: 30px;
+    line-height: 30px;
+  }
+}
 </style>

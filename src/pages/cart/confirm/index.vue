@@ -122,13 +122,11 @@ export default {
         }
       })
       const c = res => {
-        if (res.errorCode === 0) {
           wx.showToast({
             title: '订单保存成功',
             icon: 'none',
             duration: 2000
           })
-        }
       }
       that.adderssList.userName = '黄磊'
       that.adderssList.isDefault = 0

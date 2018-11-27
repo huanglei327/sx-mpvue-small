@@ -1,7 +1,7 @@
 import Fly from 'flyio/dist/npm/wx'
 const fly = new Fly()
-//const host = 'http://172.17.233.223'
-const host ='https://duoduoday.top'
+const host = 'http://172.17.233.192'
+//const host ='https://duoduoday.top'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
     wx.showLoading({
