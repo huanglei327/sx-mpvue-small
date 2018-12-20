@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     ssxxCart: getStore(),
-    userInfo: {},
+    userInfo: getUserInfo(),
+    token: getToken(),
     min: 1,
     max: 10,
     systemInfo: getSystemInfo(),
@@ -50,20 +51,31 @@ const store = new Vuex.Store({
 
   },
   mutations: {
-    clearSearchValues(state){
-      state.searchValues=[]
+    clearSearchValues(state) {
+      state.searchValues = []
       wx.removeStorageSync('searchValues')
     },
     clearStorage(state) {
+      state.searchValues = []
+      state.token = {}
       state.ssxxCart = []
+      //wx.removeStorageSync('shopCart')
     },
-    saveSearchValues(state,value){
-      if(state.searchValues.length>9){
+    clearTokenStoage(state) {
+      state.token = {}
+      wx.removeStorageSync('token')
+    },
+    saveSearchValues(state, value) {
+      if (state.searchValues.length > 9) {
         //删除最后一个
         state.searchValues.splice(0, 1)
       }
       state.searchValues.push(value)
       wx.setStorageSync('searchValues', JSON.stringify(state.searchValues))
+    },
+    saveToken(state, token) {
+      state.token = token
+      wx.setStorageSync('token', JSON.stringify(state.token))
     },
     saveUserInfo(state, userInfo) {
       state.userInfo = userInfo
@@ -113,7 +125,29 @@ function getStore() {
     return []
   }
 }
-function getSearchValues(){
+
+function getToken() {
+  var obj = wx.getStorageSync('token')
+  console.log('obj', JSON.parse(obj))
+  if (obj !== "") {
+    return JSON.parse(obj)
+  }
+  else {
+    return ""
+  }
+}
+function getUserInfo() {
+  var obj =  wx.getStorageSync('userInfo')
+   
+  if (obj !== "") {
+    return JSON.parse(obj)
+  }
+  else {
+    return {}
+  }
+}
+
+function getSearchValues() {
   var obj = wx.getStorageSync('searchValues')
   if (obj) {
     return JSON.parse(obj)

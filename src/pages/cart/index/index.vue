@@ -1,18 +1,14 @@
 <template>
   <div class="container">
-    <div v-show="ssxxCart.length<=0" class="nullCart">
-      <image src="../../../static/images/nullcart.png" />
-      <div>购物车还是空的哦~</div>
-      <div>
-        <van-button size="newSmall" @click="$common.openTabbar('/pages/index/main')" type="danger">去逛逛</van-button>
-      </div>
+    <div v-show="ssxxCart.length<=0" style="width:100%;">
+        <icon-info name="cart"></icon-info>
     </div>
     <div v-show="ssxxCart.length>0" style="width:100%;">
       <div class="shop-cart" v-for="(item,index) in getShopCart" :key="index">
         <div style="padding:10px 15px 0 15px;">
           <div class="shop-row">
             <div class="s-r-checkbox">
-              <van-checkbox :value="item.isSelected" @change="checkChange(item)"></van-checkbox>
+              <van-checkbox :value="item.isSelected" @change="checkChange(item)" checked-color="#fa6d87"></van-checkbox>
             </div>
             <div class="s-r-image">
               <image :src="item.listPicUrl" />
@@ -41,7 +37,7 @@
           <van-tag class="cart-vantag" type="primary">
             <div class="cart-sub">
               <div style="width:60%;">
-                <van-checkbox :value="allCheckboc" @change="allChange">全选 ( {{checkNum}} ) </van-checkbox>
+                <van-checkbox :value="allCheckboc" @change="allChange" checked-color="#fa6d87">全选 ( {{checkNum}} ) </van-checkbox>
               </div>
               <div>合计 : {{getCalculatePrice}}</div>
             </div>
@@ -58,6 +54,7 @@
 <script>
 import { GetGoodsListApi, SaveOrderInfoApi } from '@/utils/http/api.js'
 import { mapState, mapGetters } from 'vuex'
+import iconInfo from '../../../components/iconinfo.vue'
 export default {
   data() {
     return {
@@ -67,6 +64,9 @@ export default {
       checkNum: 0,
       isTemp: false
     }
+  },
+  components:{
+    iconInfo
   },
   computed: {
     ...mapState({
@@ -143,7 +143,6 @@ export default {
     btnSaveOrder() {
       const that = this
       const c = res => {
-        console.log('---------')
         that.$common.openWin('/pages/cart/confirm/main')
       }
       let arr = []
@@ -167,7 +166,7 @@ export default {
       const param = {
         cartList: JSON.stringify(arr)
       }
-      SaveOrderInfoApi(param).then(c)
+      SaveOrderInfoApi(arr).then(c)
     }
   },
 

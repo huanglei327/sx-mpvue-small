@@ -1,94 +1,277 @@
 <template>
-  <div class="container">
-    <div style="width:100%;">
-      <van-tabs :active="active" @change="onChange" swipe-threshold="5">
-        <van-tab title="全部">全部</van-tab>
-        <van-tab title="待付款">
-          <div>
-            <order-list :status="status"></order-list>
-          </div>
-        </van-tab>
-        <van-tab title="待发货">
-          <order-list :status="status"></order-list>
-        </van-tab>
-        <van-tab title="待收货">
-          <order-list :status="status"></order-list>
-        </van-tab>
-        <van-tab title="待评价">
-          <order-list :status="status"></order-list>
-        </van-tab>
-      </van-tabs>
+  <div>
+    <div class="o-l-m">
+      <div class="o-l-t">
+        <van-tabs
+          :active='active'
+          @change='onChange'
+          swipe-threshold='5'
+          color="#fa6d87"
+        >
+          <van-tab title='全部'></van-tab>
+          <van-tab title='待付款'>
+          </van-tab>
+          <van-tab title='待发货'>
+
+          </van-tab>
+          <van-tab title='待收货'>
+
+          </van-tab>
+          <van-tab title='待评价'>
+
+          </van-tab>
+        </van-tabs>
+      </div>
+      <div class="o-l-c">
+        <!-- <order-list :status='status'></order-list> -->
+        <view v-show="status.isTrue">
+          <view v-show="status.orList.length>0">
+            <view
+              v-for="(ditem,dindex) in status.orList"
+              :key="dindex"
+            >
+              <van-panel
+                :title="'订单编号：'+ditem.orderSn"
+                use-footer-slot
+                custom-class="panelCust"
+              >
+                <view>
+                  <view
+                    class="order-content"
+                    v-for="(item,index) in ditem.orderGoodsList"
+                    :key="index"
+                  >
+                    <view class="o-left">
+                      <image :src="item.listPicUrl" />
+                    </view>
+                    <view class="o-center">
+                      <view class="o-name">
+                        <view class="o-1">{{item.goodsName}}</view>
+                        <view class="o-2">￥{{item.retailPrice}}</view>
+                      </view>
+                      <view class="o-remark color6">
+                        <view class="o-1">{{item.goodsSpecifitionNameValue}}</view>
+                        <view class="o-2">x {{item.number}}</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view slot="footer">
+                  <view class="o-foot">
+                    <view class="o-price">应付:￥176.00</view>
+                    <view class="o-btn">
+                      <div
+                        class="order-btn"
+                        v-if="ditem.orderStatus===0"
+                      >
+                        <span>
+                          <van-button size="small">取消订单</van-button>
+                        </span>
+                        <span>
+                          <van-button
+                            size="small"
+                            type="danger"
+                          >付 款</van-button>
+                        </span>
+                      </div>
+                      <div
+                        class="order-btn"
+                        v-else
+                      >
+                        <div>
+                          <van-button size="small">评价</van-button>
+                        </div>
+                        <div>
+                          <van-button size="small">追踪物流</van-button>
+                        </div>
+                      </div>
+                    </view>
+                  </view>
+                </view>
+              </van-panel>
+            </view>
+          </view>
+          <view v-show="status.orList.length<=0">
+            <icon-info name='order'></icon-info>
+          </view>
+          <view v-show="foots.isTrue">
+            <list-foot :foots="foots"></list-foot>
+          </view>
+        </view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { GetOderListApi } from '@/utils/http/api.js'
+import { GetOderListApi } from "@/utils/http/api.js";
 
-import orderList from '../../../components/order.vue'
+import orderList from "../../../components/order.vue";
+import listFoot from "../../../components/listfoot.vue";
+import iconInfo from "../../../components/iconinfo.vue";
 
 export default {
   data() {
     return {
-      msg: '2234',
+      msg: "2234",
       active: 1,
       pageNo: 1,
       pageSize: 20,
       orderStatus: 0,
       status: {
-        orList: []
-      }
-    }
+        orList: [],
+        isTrue: false
+      },
+      isPaging: false,
+      foots: {
+        type: 1, //1加载   2到底
+        isTrue: false
+      },
+      obj: {}
+    };
   },
   components: {
-    orderList
+    orderList,
+    listFoot,
+    iconInfo
   },
   methods: {
     onChange(event) {
-      this.active = event.mp.index
-      this.orderStatus = this.getStatus(event.mp.detail.title)
-      this.pageNo = 1
-      this.goOrder()
+      this.active = event.mp.detail.index;
+      this.status.isTrue = false;
+      //每次切换加载第一页
+      this.pageNo = 1;
+      this.isPaging = false;
+      this.goOrder(event.mp.detail.title);
     },
-    goOrder() {
-      const that = this
+    goOrder(value) {
+      const that = this;
       const c = res => {
-        console.log('res',res)
-        that.status.orList = res.data
-      }
-      const param = {
+        //如果返回数据小于一页得条数 就禁止上拉加载
+        if (res.data.length < that.pageSize) {
+          that.foots = {
+            type: 2,
+            isTrue: true
+          };
+        } else {
+          that.foots = {
+            type: 1,
+            isTrue: true
+          };
+        }
+        //
+        if (!that.isPaging) {
+          that.status.orList = res.data;
+        } else {
+          res.data.forEach(item => {
+            that.status.orList.push(item);
+          });
+        }
+        that.status.isTrue = true;
+      };
+      let param = {
         pageNo: that.pageNo,
         pageSize: that.pageSize,
         orderStatus: that.orderStatus
+      };
+      console.log(that.getStatus(value));
+      if (value) {
+        param = {
+          pageNo: 1,
+          pageSize: that.pageSize,
+          orderStatus: that.getStatus(value)
+        };
       }
-      GetOderListApi(param).then(c)
+      GetOderListApi(param).then(c);
     },
     getStatus(value) {
-      var temp = 0
+      var temp = 0;
       switch (value) {
-        case '待付款':
-          temp = 0
-          break
-        case '待发货':
-          temp = 201
-          break
-        case '待收货':
-          temp = 300
-          break
-        case '已完成':
-          temp = 301
-          break
+        case "待付款":
+          temp = 0;
+          break;
+        case "待发货":
+          temp = 201;
+          break;
+        case "待收货":
+          temp = 300;
+          break;
+        case "待评价":
+          temp = 301;
+          break;
+        case "全部":
+          temp = "";
+          break;
       }
-      return temp
+      return temp;
+    },
+    getIndexById(value) {
+      var id = 0;
+      switch (value+'') {
+         case "0":
+          id = 1;
+          break;
+        case "201":
+          id = 2;
+          break;
+        case "300":
+          id = 3;
+          break;
+        case "301":
+          id = 4;
+          break;
+      }
+      return id;
+    },
+    _getRegisterInfo() {
+      const that = this;
+
+      that.pageNo++;
+      that.isPaging = true;
+      that.goOrder();
     }
   },
+  onReachBottom: function() {
+    //执行上拉执行的功能
+    if (this.foots.type === 1) {
+      this._getRegisterInfo();
+    }
+  },
+  // 停止下拉刷新
+  async onPullDownRefresh() {
+    // to doing..
+    // 停止下拉刷新
+    wx.stopPullDownRefresh();
+  },
   mounted() {
-    this.goOrder()
+    this.obj = this.$common.getUrlPages();
+    this.active = this.getIndexById(this.getStatus(this.obj.type))
+    this.goOrder(this.obj.type);
   }
-}
+};
 </script>
 
-<style lang="less">
+<style lang='less'>
+.o-l-m {
+  width: 100%;
+  position: relative;
+  .o-l-t {
+    height: 44px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+  }
+  .o-l-c {
+    width: 100%;
+    z-index: 99;
+    margin-top: 44px;
+  }
+}
+.order-list {
+  position: relative;
+  top: 0;
+}
 .order-btn {
   span {
     margin-left: 10px;
@@ -108,7 +291,7 @@ export default {
     }
   }
   .o-center {
-    padding: 0 15px;
+    padding-right: 15px;
     width: 100%;
     .o-name {
       min-height: 40px;
@@ -151,6 +334,11 @@ export default {
 }
 .order-content:last-child {
   border-bottom: 0px;
+}
+.order-reamrk {
+  text-align: center;
+  font-size: 12px;
+  padding-top: 10px;
 }
 </style>
 

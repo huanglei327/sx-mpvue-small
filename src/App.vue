@@ -33,10 +33,10 @@ page {
   color: #efefef;
 }
 .price-color {
-  color: #a42d39;
+  color: #fa6d87;
 }
 .s-price{
-  color: #a42d39;
+  color: #fa6d87;
   font-size: 16px;
 }
 .container {
@@ -96,6 +96,27 @@ page {
 }
 .main-title {
   margin: 0 15px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  position: relative;
+
+  .right {
+    display: flex;
+    font-size: 14px;
+    line-height: 45px;
+    text-align: right;
+    position: absolute;
+    right: 10rpx;
+    top: 0;
+    .u-icon {
+      height: 20px;
+      padding-top: 4rpx;
+      font-size: 11px;
+    }
+  }
+}
+.order-title{
   height: 40px;
   line-height: 40px;
   font-size: 16px;

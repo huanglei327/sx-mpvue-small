@@ -1,5 +1,4 @@
 <template>
-
   <div class="container">
     <div class="c-address">
       <van-cell-group>
@@ -14,13 +13,14 @@
         </van-cell>
       </van-cell-group>
     </div>
+    <div class="c-cut-off"></div>
     <div class="d-space"></div>
     <div v-show="ssxxCart.length>0" style="width:100%;">
       <div class="shop-cart" v-for="(item,index) in getShopCart" :key="index">
         <div style="padding:10px 15px 0 15px;">
           <div class="shop-row">
             <div class="s-r-checkbox">
-              <van-checkbox :value="item.isSelected" @change="checkChange(item)"></van-checkbox>
+              <van-checkbox checked-color="#fa6d87" :value="item.isSelected" @change="checkChange(item)" ></van-checkbox>
             </div>
             <div class="s-r-image">
               <image :src="item.listPicUrl" />
@@ -166,11 +166,20 @@ export default {
 
 <style lang="less">
 .c-address {
+  
   width: 100%;
   .c-add-ils {
     line-height: 20px;
     padding-top: 5px;
   }
+}
+.c-cut-off{
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    background: -webkit-repeating-linear-gradient(135deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
+    /* background: repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%); */
+    background-size: 80px;
 }
 
 .shop-cart {

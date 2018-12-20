@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "首页",
-    "disableScroll": true
+    "usingComponents": {
+      "van-button": "../../static/vant/button/index"
+    }
 }

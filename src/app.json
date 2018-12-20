@@ -12,7 +12,10 @@
     "pages/cart/confirm/main",
     "pages/user/index/main",
     "pages/user/order/main",
-    "pages/user/footprint/main"
+    "pages/user/footprint/main",
+    "pages/user/feedback/main",
+    "pages/login/main",
+    "pages/utils/error/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

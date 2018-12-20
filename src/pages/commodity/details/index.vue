@@ -18,8 +18,8 @@
         <div>分享</div>
       </div>
       <div class="dt-price">
-        <span class="dx-4">￥</span>
-        <span class="dt-p">{{goodsInfo.retailPrice}}</span>&nbsp;&nbsp;&nbsp;
+        <span class="dx-4 price-color">￥</span>
+        <span class="dt-p price-color">{{goodsInfo.retailPrice}}</span>&nbsp;&nbsp;&nbsp;
         <span class="dt-x">￥{{goodsInfo.marketPrice}}</span>
       </div>
     </div>
@@ -34,11 +34,11 @@
       </van-cell-group>
     </div>
     <div class="d-space"></div>
-    <!-- <div class="d-details">
-      <div>
+     <div class="d-details">
+      <!-- <div>
         <wxParse :content="goodsInfo.goodsDesc" @preview="preview" @navigate="navigate" />
-      </div>
-    </div> -->
+      </div> -->
+    </div> 
     <div style="z-index:101;">
       <van-goods-action>
         <van-goods-action-icon icon="chat" text="客服" />
@@ -57,7 +57,7 @@
           <div class="div-t">
             <div class="a">{{skuInfo.name}}</div>
             <div class="b">{{skuInfo.goodsBrief}}</div>
-            <div class="c">￥{{skuInfo.retailPrice}}</div>
+            <div class="c price-color">￥{{skuInfo.retailPrice}}</div>
           </div>
           <div class="div-f">分享</div>
         </div>
@@ -183,7 +183,9 @@ export default {
           if (isTrue) {
             this.$store.commit('upCart', that.skuInfo)
           } else {
-            that.skuInfo.shopNumber = that.shopNumber
+            
+            that.skuInfo.number = that.shopNumber
+            console.log('shopnum',  that.skuInfo)
             this.$store.commit('addCart', that.skuInfo)
           }
         }
@@ -302,10 +304,8 @@ export default {
 }
 .dt-main {
   width: 100%;
-  padding: 0 15px;
   background: white;
   .dt-name {
-    width: 100%;
     display: flex;
     padding: 0 30rpx;
     margin: 20rpx 0 0 0;
@@ -324,16 +324,13 @@ export default {
     }
   }
   .dt-price {
-    width: 100%;
     display: flex;
     padding: 0 30rpx;
     height: 30px;
     line-height: 30px;
     .dx-4 {
-      color: @price-color;
     }
     .dt-p {
-      color: @price-color;
       font-size: 20px;
       font-weight: 600;
     }
@@ -380,7 +377,6 @@ export default {
         -webkit-box-orient: vertical;
       }
       .c {
-        color: @price-color;
         font-size: 18px;
       }
     }

@@ -99,7 +99,7 @@ export default {
   background: #fff;
   position: relative;
   z-index: 2;
-  border-left: 3px solid red;
+  border-left: 3px solid #fa6d87;
   font-size: 16px;
 }
 .left view {
