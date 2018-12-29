@@ -180,7 +180,6 @@ export default {
   },
   onHide() {
     this.isTemp = false
-    console.log('onhide')
   },
   onShow() {
     console.log('getcurrentpages', getCurrentPages())

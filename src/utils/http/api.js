@@ -79,3 +79,16 @@ export function GetHotGoodsApi(param){
   const apiName='api/index/hotgoods'
   return post(apiName,param)
 }
+
+
+//获取签名支付
+export function GetGenerateOrderApi(param){
+  const apiName='/api/pay/prepay'
+  return post(apiName,param)
+}
+
+//支付结果
+export function GetNotify(param){
+  const apiName='/api/pay/notify'
+  return post(apiName,param)
+}

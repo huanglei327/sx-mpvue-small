@@ -18,6 +18,7 @@
               :src="item.imageUrl"
               class="slide-image"
               mode="aspectFill"
+              height="170"
             />
           </swiper-item>
         </block>
@@ -285,12 +286,13 @@ export default {
 .d-swiper {
   width: 100%;
   .swiper {
-    swiper-item {
-      image {
+      .slide-image {
+        height: 170px;
+        width: 100%;
         border-radius: 5px;
         display: block;
       }
-    }
+ 
   }
 }
 .d-m {

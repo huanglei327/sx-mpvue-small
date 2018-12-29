@@ -91,7 +91,7 @@ export function showToast(title, success) {
 export function GetTokens() {
   //没有登陆
   if (Object.keys(store.state.token).length <= 0) {
-    return false 
+    return false
   }
   else {
     return true
@@ -124,6 +124,13 @@ export function getWxLogin(param) {
     store.commit('saveToken', res.token)
     //插入用户信息
     store.commit('saveUserInfo', res.userInfo)
+    // var pages = getCurrentPages() //获取加载的页面
+    // var currentPage = pages[pages.length - 1] //获取当前页面的对象
+    // console.log('currentPage',currentPage)
+    // var url = currentPage.route //当前页面url
+    // var options = currentPage.options //如果要获取url中所带的参数可以查看options
+    // console.log(options)
+
     backBeaforWin()
   }
   getWxLoginApi(param).then(c)
@@ -193,6 +200,28 @@ export function userLogin() {
       }
     },
     fail: function (res) {
+    }
+  })
+}
+
+
+export function GoPay(param) {
+  console.log('gopay')
+  wx.requestPayment({
+    timeStamp: param.timeStamp,
+    nonceStr: param.nonceStr,
+    package: param.package,
+    signType: 'MD5',
+    paySign: param.paySign,
+    success(res) {
+      wx.showToast({
+        title: '支付成功',
+        icon: 'success',
+        duration: 2000
+      })
+    },
+    fail(res) {
+      console.log(res)
     }
   })
 }

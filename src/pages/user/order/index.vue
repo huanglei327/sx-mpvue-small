@@ -2,39 +2,20 @@
   <div>
     <div class="o-l-m">
       <div class="o-l-t">
-        <van-tabs
-          :active='active'
-          @change='onChange'
-          swipe-threshold='5'
-          color="#fa6d87"
-        >
-          <van-tab title='全部'></van-tab>
-          <van-tab title='待付款'>
-          </van-tab>
-          <van-tab title='待发货'>
-
-          </van-tab>
-          <van-tab title='待收货'>
-
-          </van-tab>
-          <van-tab title='待评价'>
-
-          </van-tab>
+        <van-tabs :active="active" @change="onChange" swipe-threshold="5" color="#fa6d87">
+          <van-tab title="全部"></van-tab>
+          <van-tab title="待付款"></van-tab>
+          <van-tab title="待发货"></van-tab>
+          <van-tab title="待收货"></van-tab>
+          <van-tab title="待评价"></van-tab>
         </van-tabs>
       </div>
       <div class="o-l-c">
         <!-- <order-list :status='status'></order-list> -->
         <view v-show="status.isTrue">
           <view v-show="status.orList.length>0">
-            <view
-              v-for="(ditem,dindex) in status.orList"
-              :key="dindex"
-            >
-              <van-panel
-                :title="'订单编号：'+ditem.orderSn"
-                use-footer-slot
-                custom-class="panelCust"
-              >
+            <view v-for="(ditem,dindex) in status.orList" :key="dindex">
+              <van-panel :title="'订单编号：'+ditem.orderSn" use-footer-slot custom-class="panelCust">
                 <view>
                   <view
                     class="order-content"
@@ -42,7 +23,7 @@
                     :key="index"
                   >
                     <view class="o-left">
-                      <image :src="item.listPicUrl" />
+                      <image :src="item.listPicUrl"/>
                     </view>
                     <view class="o-center">
                       <view class="o-name">
@@ -60,10 +41,7 @@
                   <view class="o-foot">
                     <view class="o-price">应付:￥176.00</view>
                     <view class="o-btn">
-                      <div
-                        class="order-btn"
-                        v-if="ditem.orderStatus===0"
-                      >
+                      <div class="order-btn" v-if="ditem.orderStatus===0">
                         <span>
                           <van-button size="small">取消订单</van-button>
                         </span>
@@ -71,13 +49,11 @@
                           <van-button
                             size="small"
                             type="danger"
+                            @click="GetGenerateOrder(ditem.id)"
                           >付 款</van-button>
                         </span>
                       </div>
-                      <div
-                        class="order-btn"
-                        v-else
-                      >
+                      <div class="order-btn" v-else>
                         <div>
                           <van-button size="small">评价</van-button>
                         </div>
@@ -92,7 +68,7 @@
             </view>
           </view>
           <view v-show="status.orList.length<=0">
-            <icon-info name='order'></icon-info>
+            <icon-info name="order"></icon-info>
           </view>
           <view v-show="foots.isTrue">
             <list-foot :foots="foots"></list-foot>
@@ -104,7 +80,7 @@
 </template>
 
 <script>
-import { GetOderListApi } from "@/utils/http/api.js";
+import { GetOderListApi, GetGenerateOrderApi } from "@/utils/http/api.js";
 
 import orderList from "../../../components/order.vue";
 import listFoot from "../../../components/listfoot.vue";
@@ -143,6 +119,23 @@ export default {
       this.pageNo = 1;
       this.isPaging = false;
       this.goOrder(event.mp.detail.title);
+    },
+    GetGenerateOrder(orderId) {
+      const that = this;
+      const c = res => {
+          let param = {
+            timeStamp: res.timeStamp,
+            paySign: res.paySign,
+            package: res.package,
+            nonceStr: res.nonceStr,
+            signType: res.signType
+          };
+          that.$common.GoPay(param);
+      };
+      const param = {
+        orderId: orderId
+      };
+      GetGenerateOrderApi(param).then(c);
     },
     goOrder(value) {
       const that = this;
@@ -207,8 +200,8 @@ export default {
     },
     getIndexById(value) {
       var id = 0;
-      switch (value+'') {
-         case "0":
+      switch (value + "") {
+        case "0":
           id = 1;
           break;
         case "201":
@@ -245,7 +238,7 @@ export default {
   },
   mounted() {
     this.obj = this.$common.getUrlPages();
-    this.active = this.getIndexById(this.getStatus(this.obj.type))
+    this.active = this.getIndexById(this.getStatus(this.obj.type));
     this.goOrder(this.obj.type);
   }
 };

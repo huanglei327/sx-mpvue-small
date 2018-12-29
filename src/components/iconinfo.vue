@@ -53,7 +53,6 @@
 export default {
   props: ["name"],
   created(){
-    console.log('1312313')
   }
 };
 </script>

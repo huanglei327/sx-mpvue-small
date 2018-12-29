@@ -1,7 +1,7 @@
 import Fly from 'flyio/dist/npm/wx'
 import { showToast, redirectTo,getToken } from '../js/common.js'
 const fly = new Fly()
-//const host = 'http://172.17.234.246'
+//const host = 'http://172.17.235.12'
 const host = 'https://duoduoday.top'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
@@ -52,7 +52,6 @@ fly.interceptors.response.use(
   },
   (err) => {
     // 请求出错，根据返回状态码判断出错原因
-    console.log(err)
     wx.hideLoading()
     if (err) {
       redirectTo('/pages/utils/error/main')

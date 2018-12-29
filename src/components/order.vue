@@ -88,7 +88,6 @@ export default {
     iconInfo
   },
   created() {
-    console.log(this.status);
   },
   methods: {}
 };

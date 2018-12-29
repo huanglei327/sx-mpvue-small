@@ -128,7 +128,6 @@ function getStore() {
 
 function getToken() {
   var obj = wx.getStorageSync('token')
-  console.log('obj', JSON.parse(obj))
   if (obj !== "") {
     return JSON.parse(obj)
   }
