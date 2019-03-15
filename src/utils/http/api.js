@@ -92,3 +92,8 @@ export function GetNotify(param){
   const apiName='/api/pay/notify'
   return post(apiName,param)
 }
+
+export function GoRefundApi(param){
+  const apiName='/api/pay/refund'
+  return post(apiName,param)
+}

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="d-title">登陆</div>
-    
     <button
       open-type="getUserInfo"
       @getuserinfo="bindGetUserInfo"
@@ -49,6 +48,9 @@ export default {
     wxLogin() {
       this.$common.userLogin();
     },
+    getNumber(e){
+      console.log(e)
+    },
     bindGetUserInfo(e) {
       const that =this
       var code = wx.login({
@@ -58,7 +60,7 @@ export default {
             if (e.mp.detail.rawData) {
               //用户按了允许授权按钮
               console.log("用户按了允许授权按钮");
-              
+              console.log(e)
               let obj = e.mp.detail;
               const param = {
                 jsCode: code,
@@ -70,29 +72,8 @@ export default {
                 iv: obj.iv
               };
               that.$common.getWxLogin(param);
-             } 
-            // else {
-            //   //用户按了拒绝按钮
-            //   //用户按了拒绝按钮
-            //   wx.showModal({
-            //     title: "警告通知",
-            //     content:
-            //       "您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。",
-            //     success: function(res) {
-            //       if (res.confirm) {
-            //         wx.openSetting({
-            //           success: res => {
-            //             if (res.authSetting["scope.userInfo"]) {
-            //               ////如果用户重新同意了授权登录
-            //               console.log(res);
-            //               console.log('e',e)
-            //             }
-            //           }
-            //         });
-            //       }
-            //     }
-            //   });
-            // }
+              wx.navigateBack({ delta: 1 })
+             }
           }
         },fail:function(res){
           console.log(fail)

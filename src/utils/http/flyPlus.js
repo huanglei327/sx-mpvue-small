@@ -1,7 +1,7 @@
 import Fly from 'flyio/dist/npm/wx'
-import { showToast, redirectTo,getToken } from '../js/common.js'
+import { showToast, redirectTo, getToken } from '../js/common.js'
 const fly = new Fly()
-//const host = 'http://172.17.235.12'
+//const host = 'http://172.17.234.152'
 const host = 'https://duoduoday.top'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
@@ -18,7 +18,7 @@ fly.interceptors.request.use((request) => {
   // let authParams = {
   //   token:getToken()
   // }
-  
+
   request.body.ssshopToken = getToken()
 
   request.body && Object.keys(request.body).forEach((val) => {
@@ -37,15 +37,15 @@ fly.interceptors.request.use((request) => {
 fly.interceptors.response.use(
   (response) => {
     wx.hideLoading()
-    let code = response.data.errorCode
-    if (code + '' === '0') {
+    let code = response.data.errorCode + ''
+    if (code === '0') {
       return response.data
     }
     else {
-      if (code + '' === '1') {
-        redirectTo('/pages/utils/error/main')
+      if (code === '1') {
+        showToast(response.data.errorMessage, 'none')
       }
-      else if (code + '' === '9') {
+      else if (code === '9') {
         redirectTo('/pages/login/main')
       }
     }

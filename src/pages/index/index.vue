@@ -238,11 +238,14 @@ export default {
     // 调用应用实例的方法获取全局数据
     //this.getUserInfo();
   },
+  
   mounted() {
     const that = this;
     //检测是否登陆是否有效
     that.$common.checkLogin();
     that.init();
+
+    
   }
 };
 </script>

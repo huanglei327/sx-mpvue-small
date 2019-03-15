@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="u-header">
-      <div class="u-tou" v-if="userInfo.avatarUrl">
+      <div class="u-tou" v-if="userInfo.avatarUrl!== undefined">
         <image :src="userInfo.avatarUrl" />
         <div class="u-name">{{userInfo.nickName}}</div>
       </div>
@@ -119,14 +119,46 @@ export default {
     },
     shippinpAddress() {
       const that = this;
-      wx.chooseAddress({
+       wx.chooseAddress({
+              success: function(res) {
+                that.userName = res.userName;
+                that.address =
+                  res.provinceName +
+                  res.cityName +
+                  res.countyName +
+                  res.detailInfo;
+                that.telNumber = res.telNumber;
+              },fail(res){
+                console.log(res)
+              }
+            });
+        wx.getSetting({
         success(res) {
-          that.userName = res.userName;
-          that.address =
-            res.provinceName + res.cityName + res.countyName + res.detailInfo;
-          that.telNumber = res.telNumber;
+          console.log(JSON.stringify(res))
+          if (!res.authSetting["scope.address"]) {
+            wx.openSetting({
+
+            });
+          } else {
+            //打开选择地址
+            wx.chooseAddress({
+              success: function(res) {
+                that.userName = res.userName;
+                that.address =
+                  res.provinceName +
+                  res.cityName +
+                  res.countyName +
+                  res.detailInfo;
+                that.telNumber = res.telNumber;
+              }
+            });
+          }
+        },
+        fail(res) {
+          console.log("调用失败");
         }
       });
+      
     },
     goOrderList(type) {
       let isTrue=  this.$common.GetTokens()

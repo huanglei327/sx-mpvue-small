@@ -54,12 +54,12 @@
                         </span>
                       </div>
                       <div class="order-btn" v-else>
-                        <div>
+                        <span>
                           <van-button size="small">评价</van-button>
-                        </div>
-                        <div>
-                          <van-button size="small">追踪物流</van-button>
-                        </div>
+                        </span>
+                        <span>
+                          <van-button size="small" @click="goRefund(ditem.id)">退款</van-button>
+                        </span>
                       </div>
                     </view>
                   </view>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { GetOderListApi, GetGenerateOrderApi } from "@/utils/http/api.js";
+import { GetOderListApi, GetGenerateOrderApi,GoRefundApi } from "@/utils/http/api.js";
 
 import orderList from "../../../components/order.vue";
 import listFoot from "../../../components/listfoot.vue";
@@ -119,6 +119,16 @@ export default {
       this.pageNo = 1;
       this.isPaging = false;
       this.goOrder(event.mp.detail.title);
+    },
+    goRefund(orderId){
+      const that =this
+      const c = res =>{
+        console.log(res)
+      }
+      const param = {
+        orderId:orderId
+      }
+      GoRefundApi(param).then(c)
     },
     GetGenerateOrder(orderId) {
       const that = this;

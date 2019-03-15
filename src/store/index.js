@@ -57,8 +57,9 @@ const store = new Vuex.Store({
     },
     clearStorage(state) {
       state.searchValues = []
-      state.token = {}
+      state.token =""
       state.ssxxCart = []
+      state.userInfo={}
       //wx.removeStorageSync('shopCart')
     },
     clearTokenStoage(state) {

@@ -13,7 +13,7 @@
         background="#f5f5f5"
       />
     </div>
-    <div class="c-main" v-if="goodsList.length>0">
+    <div class="c-main">
       <div
         class="c-content"
         v-for="(item,index) in goodsList"
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div v-else style="width:100%;">
+    <div v-if="isShowGoods" style="width:100%;">
       <icon-info name="goods"></icon-info>
     </div>
   </div>
@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       goodsList: [],
+      isShowGoods:false,
       obj: {
         categoryId: "",
         keyword: ""
@@ -65,8 +66,11 @@ export default {
     },
     GetGoodsList() {
       const that = this;
-      const c = res => {
+      const c = res => {        
         that.goodsList = res.data;
+        if(that.goodsList.length<=0){
+          that.isShowGoods=true
+        }
       };
       const param = {
         categoryId: that.obj.classId,

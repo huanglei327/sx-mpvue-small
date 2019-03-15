@@ -148,7 +148,7 @@ page {
   padding: 0 15px;
 }
 .panelCust{
-  margin: 5px;
+  margin: 5px 0;
 }
 .nullCart {
   text-align: center;
