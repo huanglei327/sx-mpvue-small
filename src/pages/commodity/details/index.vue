@@ -4,7 +4,7 @@
       <swiper class="swiper" indicator-dots="true">
         <block v-for="(item, index) in list.gallery" :index="index" :key="index">
           <swiper-item @click="$common.showPreviewImage(item.imgUrl,list.gallery,'imgUrl')">
-            <image :src="item.imgUrl" class="slide-image" mode="aspectFill" />
+            <image :src="item.imgUrl" class="slide-image" mode="aspectFill" lazy-load="true" />
           </swiper-item>
         </block>
       </swiper>

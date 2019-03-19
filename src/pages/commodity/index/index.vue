@@ -27,6 +27,7 @@
             <image
               :src="item.listPicUrl"
               mode="widthFix"
+              lazy-load="true"
             />
 
           </div>
@@ -69,7 +70,7 @@ export default {
       const c = res => {        
         that.goodsList = res.data;
         if(that.goodsList.length<=0){
-          that.isShowGoods=true
+          that.isShowGoods = true
         }
       };
       const param = {
@@ -88,6 +89,8 @@ export default {
   mounted() {
     const that = this;
     let temp = that.$common.getUrlPages();
+    that.isShowGoods = false
+    that.goodsList= []
     that.obj.classId = temp.classId ? temp.classId : "";
     that.obj.keyword = temp.keyword ? temp.keyword : "";
     that.GetGoodsList();

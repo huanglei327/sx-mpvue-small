@@ -87,7 +87,7 @@ export default {
   }
   image {
     width: 80%;
-    height: 300px;
+    height: 350px;
   }
   view {
     height: 30px;

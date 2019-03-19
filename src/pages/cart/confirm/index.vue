@@ -20,10 +20,14 @@
         <div style="padding:10px 15px 0 15px;">
           <div class="shop-row">
             <div class="s-r-checkbox">
-              <van-checkbox checked-color="#fa6d87" :value="item.isSelected" @change="checkChange(item)" ></van-checkbox>
+              <van-checkbox
+                checked-color="#fa6d87"
+                :value="item.isSelected"
+                @change="checkChange(item)"
+              ></van-checkbox>
             </div>
             <div class="s-r-image">
-              <image :src="item.listPicUrl" />
+              <image :src="item.listPicUrl"/>
             </div>
             <div class="s-r-content">
               <div class="s-r-name">{{item.name}}</div>
@@ -33,7 +37,18 @@
               <div class="s-p-n">
                 <div class="s-p-p">￥{{item.retailPrice}}</div>
                 <div class="s-p-step">
-                  <van-stepper :value="item.number" integer="true" input-class="inputClass" minus-class="minusClass" plus-class="plusClass" :min="min" :max="max" step="1" @plus="plusCart(item,1)" @minus="minusCart(item,-1)" />
+                  <van-stepper
+                    :value="item.number"
+                    integer="true"
+                    input-class="inputClass"
+                    minus-class="minusClass"
+                    plus-class="plusClass"
+                    :min="min"
+                    :max="max"
+                    step="1"
+                    @plus="plusCart(item,1)"
+                    @minus="minusCart(item,-1)"
+                  />
                 </div>
               </div>
             </div>
@@ -44,20 +59,25 @@
     </div>
     <div class="c-deta-list">
       <van-cell-group>
-        <van-cell is-link :value="'￥'+getCalculatePrice">
+        <van-cell  :value="'￥'+getCalculatePrice">
           <view slot="title">
             <span class="van-cell-text">商品合计</span>
           </view>
         </van-cell>
-        <van-cell title="运费" is-link value="￥0.00" />
+        <van-cell title="运费"  value="￥0.00"/>
       </van-cell-group>
     </div>
     <div class="vansub">
-      <van-submit-bar custom-class="customClass" button-class="buttonClass" button-text="提交订单" @submit="onClickButton">
+      <van-submit-bar
+        custom-class="customClass"
+        button-class="buttonClass"
+        button-text="提交订单"
+        @submit="onClickButton"
+      >
         <van-tag class="cart-vantag" type="primary">
           <div class="cart-sub">
-            <div style="width:60%;">
-              总价: ￥<span class="s-price">{{getCalculatePrice}}</span>
+            <div style="width:60%;">总价: ￥
+              <span class="s-price">{{getCalculatePrice}}</span>
             </div>
             <div class="color6">共 {{getValidCartNum}} 件商品</div>
           </div>
@@ -68,118 +88,142 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import { SaveOrdersApi } from '@/utils/http/api.js'
+import { mapState, mapGetters } from "vuex";
+import { SaveOrdersApi, GetGenerateOrderApi } from "@/utils/http/api.js";
 export default {
   data() {
     return {
-      msg: '213123',
-      address: '',
-      userName: '',
-      telNumber: '',
-      adderssList: {}
-    }
+      msg: "213123",
+      address: "",
+      userName: "",
+      telNumber: "",
+      adderssList: {},
+      orderId: 0
+    };
   },
   computed: {
     ...mapState({
       ssxxCart: state => {
         return state.ssxxCart.filter(function(item) {
-          return item.isSelected
-        })
+          return item.isSelected;
+        });
       },
       min: state => {
-        return state.min
+        return state.min;
       },
       max: state => {
-        return state.max
+        return state.max;
       }
     }),
     ...mapGetters({
-      getCalculatePrice: 'getCalculatePrice',
-      getShopCart: 'getShopCart',
-      getValidCartNum: 'getValidCartNum'
+      getCalculatePrice: "getCalculatePrice",
+      getShopCart: "getShopCart",
+      getValidCartNum: "getValidCartNum"
     })
   },
   methods: {
     onClickButton() {
-      const that = this
-      if (that.userName === '') {
+      const that = this;
+      if (that.userName === "") {
         wx.showToast({
-          title: '请填写收货地址',
-          icon: 'none',
+          title: "请填写收货地址",
+          icon: "none",
           duration: 2000
-        })
-        return
+        });
+        return;
       }
-      let arr = []
+      let arr = [];
       that.ssxxCart.forEach(item => {
         if (item.isSelected) {
           arr.push({
             productId: item.productId,
             goodsId: item.goodsId,
             number: item.number
-          })
+          });
         }
-      })
+      });
       const c = res => {
-          wx.showToast({
-            title: '订单保存成功',
-            icon: 'none',
-            duration: 2000
-          })
-      }
-      that.adderssList.userName = '黄磊'
-      that.adderssList.isDefault = 0
-      delete that.adderssList.errMsg
+          that.orderId = res.orderInfo.id;
+          that.GetGenerateOrder(that.orderId);
+      };
+      that.adderssList.userName = "黄磊";
+      that.adderssList.isDefault = 0;
+      delete that.adderssList.errMsg;
       const param = {
-        cartList:arr,
+        cartList: arr,
         address: that.adderssList
-      }
-      SaveOrdersApi(param).then(c)
+      };
+      SaveOrdersApi(param).then(c);
+    },
+    GetGenerateOrder(orderId) {
+      const that = this;
+      const c = res => {
+        let param = {
+          timeStamp: res.timeStamp,
+          paySign: res.paySign,
+          package: res.package,
+          nonceStr: res.nonceStr,
+          signType: res.signType
+        };
+        that.$common.GoPay(param);
+      };
+      const param = {
+        orderId: orderId
+      };
+      GetGenerateOrderApi(param).then(c);
     },
     plusCart(item, value) {
-      this.calculateNum(item, value)
+      this.calculateNum(item, value);
     },
     minusCart(item, value) {
-      this.calculateNum(item, value)
+      this.calculateNum(item, value);
     },
     calculateNum(item, value) {
-      item.number = item.number + value
-      this.$store.commit('upCart', item)
+      item.number = item.number + value;
+      this.$store.commit("upCart", item);
     },
     upAddress() {
-      const that = this
+      const that = this;
       wx.chooseAddress({
         success(res) {
-          that.userName = res.userName
+          that.userName = res.userName;
           that.address =
-            res.provinceName + res.cityName + res.countyName + res.detailInfo
-          that.telNumber = res.telNumber
-          that.adderssList = res
+            res.provinceName + res.cityName + res.countyName + res.detailInfo;
+          that.telNumber = res.telNumber;
+          that.adderssList = res;
         }
-      })
+      });
     }
   },
   mounted() {}
-}
+};
 </script>
 
 <style lang="less">
 .c-address {
-  
   width: 100%;
   .c-add-ils {
     line-height: 20px;
     padding-top: 5px;
   }
 }
-.c-cut-off{
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    background: -webkit-repeating-linear-gradient(135deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
-    /* background: repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%); */
-    background-size: 80px;
+.c-cut-off {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background: -webkit-repeating-linear-gradient(
+    135deg,
+    #ff6c6c 0,
+    #ff6c6c 20%,
+    transparent 0,
+    transparent 25%,
+    #1989fa 0,
+    #1989fa 45%,
+    transparent 0,
+    transparent 50%
+  );
+  /* background: repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%); */
+  background-size: 80px;
 }
 
 .shop-cart {

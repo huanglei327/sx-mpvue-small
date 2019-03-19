@@ -39,7 +39,7 @@
                 </view>
                 <view slot="footer">
                   <view class="o-foot">
-                    <view class="o-price">应付:￥176.00</view>
+                    <view class="o-price">应付:￥{{ditem.actualPrice}}</view>
                     <view class="o-btn">
                       <div class="order-btn" v-if="ditem.orderStatus===0">
                         <span>
@@ -67,11 +67,13 @@
               </van-panel>
             </view>
           </view>
-          <view v-show="status.orList.length<=0">
+          <view v-if="status.orList.length<=0">
             <icon-info name="order"></icon-info>
           </view>
-          <view v-show="foots.isTrue">
-            <list-foot :foots="foots"></list-foot>
+          <view v-else>
+            <view v-show="foots.isTrue">
+              <list-foot :foots="foots"></list-foot>
+            </view>
           </view>
         </view>
       </div>
@@ -80,7 +82,11 @@
 </template>
 
 <script>
-import { GetOderListApi, GetGenerateOrderApi,GoRefundApi } from "@/utils/http/api.js";
+import {
+  GetOderListApi,
+  GetGenerateOrderApi,
+  GoRefundApi
+} from "@/utils/http/api.js";
 
 import orderList from "../../../components/order.vue";
 import listFoot from "../../../components/listfoot.vue";
@@ -120,27 +126,27 @@ export default {
       this.isPaging = false;
       this.goOrder(event.mp.detail.title);
     },
-    goRefund(orderId){
-      const that =this
-      const c = res =>{
-        console.log(res)
-      }
+    goRefund(orderId) {
+      const that = this;
+      const c = res => {
+        console.log(res);
+      };
       const param = {
-        orderId:orderId
-      }
-      GoRefundApi(param).then(c)
+        orderId: orderId
+      };
+      GoRefundApi(param).then(c);
     },
     GetGenerateOrder(orderId) {
       const that = this;
       const c = res => {
-          let param = {
-            timeStamp: res.timeStamp,
-            paySign: res.paySign,
-            package: res.package,
-            nonceStr: res.nonceStr,
-            signType: res.signType
-          };
-          that.$common.GoPay(param);
+        let param = {
+          timeStamp: res.timeStamp,
+          paySign: res.paySign,
+          package: res.package,
+          nonceStr: res.nonceStr,
+          signType: res.signType
+        };
+        that.$common.GoPay(param);
       };
       const param = {
         orderId: orderId
@@ -177,7 +183,6 @@ export default {
         pageSize: that.pageSize,
         orderStatus: that.orderStatus
       };
-      console.log(that.getStatus(value));
       if (value) {
         param = {
           pageNo: 1,

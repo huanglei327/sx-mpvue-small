@@ -16,6 +16,7 @@
           <swiper-item>
             <image
               :src="item.imageUrl"
+              :lazy-load="true"
               class="slide-image"
               mode="aspectFill"
               height="170"
@@ -57,6 +58,7 @@
         >
           <div class="left">
             <image
+            :lazy-load="true"
               class="imgs"
               src="https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png"
             />
@@ -84,7 +86,7 @@
               class="item"
               @click="$common.openWin('/pages/commodity/details/main?goodsId=1181000')"
             >
-              <image :src="item.listPicUrl" />
+              <image :src="item.listPicUrl" :lazy-load="true"/>
               <div>
                 <div class="n-1">
                   <!-- <div>严选明星</div> -->
@@ -205,7 +207,6 @@ export default {
       const that = this;
       //that.$showPreviewImage(imageValue)
       that.$common.showPreviewImage(imageValue);
-      return;
       let values = [];
       values.push(imageValue);
       wx.previewImage({

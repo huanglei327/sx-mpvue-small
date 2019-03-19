@@ -75,11 +75,16 @@ page {
     width: 28px;
     height: 27px;
     font-size: 12px;
+    margin: 0;
+    padding: 0
   }
   .plusClass,
   .minusClass {
-    height: 30px;
-    width: 32px;
+    width: 28px;
+    height: 29px;
+    font-size: 12px;
+    margin: 0;
+    padding: 0
   }
 }
 .vansub {
@@ -87,7 +92,7 @@ page {
     height: 50px;
   }
   .buttonClass {
-    height: 46px;
+    //height: 46px;
     line-height: 46px;
   }
   .customClass{
