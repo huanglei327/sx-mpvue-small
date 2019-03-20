@@ -15,7 +15,8 @@
     "pages/user/footprint/main",
     "pages/user/feedback/main",
     "pages/login/main",
-    "pages/utils/error/main"
+    "pages/utils/error/main",
+    "pages/cart/payment/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

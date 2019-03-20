@@ -214,13 +214,15 @@ export function GoPay(param) {
     signType: 'MD5',
     paySign: param.paySign,
     success(res) {
-      wx.showToast({
-        title: '支付成功',
-        icon: 'success',
-        duration: 2000
-      })
+      openWin('/pages/cart/payment/main')
+      // wx.showToast({
+      //   title: '支付成功',
+      //   icon: 'success',
+      //   duration: 2000
+      // })
     },
     fail(res) {
+      openWin('/pages/cart/payment/main')
       console.log(res)
     }
   })

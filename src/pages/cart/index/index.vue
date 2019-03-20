@@ -114,7 +114,7 @@ export default {
         content: '确定删除该商品吗',
         success(res) {
           if (res.confirm) {
-            that.$store.commit('delCart', item)
+            that.$store.commit('upCart', item)
           } else if (res.cancel) {
             console.log('用户点击取消')
           }

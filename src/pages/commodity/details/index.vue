@@ -43,9 +43,9 @@
       <van-goods-action>
         <van-goods-action-icon icon="chat" text="客服" />
         <van-goods-action-icon icon="cart" text="购物车" @click="$common.reLaunch('/pages/cart/index/main')" :info="ssxxCart>0?ssxxCart:''" />
-        <van-goods-action-icon icon="shop" text="店铺" />
+        <van-goods-action-icon icon="shop" text="店铺"/>
         <van-goods-action-button text="加入购物车" type="warning" size="small" @click="SaveShopCart" />
-        <van-goods-action-button text="立即购买" size="mini" />
+        <van-goods-action-button text="立即购买" size="mini"  @click="goConfirmOder" />
       </van-goods-action>
     </div>
     <van-popup class="detailsPopup" :show="show" position="bottom" close-on-click-overlay="true" @close="closeProp">
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { GetGoodsDetailsApi } from '@/utils/http/api.js'
+import { GetGoodsDetailsApi, SaveOrderInfoApi  } from '@/utils/http/api.js'
 import wxParse from 'mpvue-wxparse'
 import { mapState } from 'vuex'
 export default {
@@ -127,6 +127,58 @@ export default {
     })
   },
   methods: {
+    goConfirmOder(){
+      const that = this
+      if (!that.show) {
+        that.show = !that.show
+      } else {
+        if (this.checkDetails()) {
+          var isTrue = false
+          that.tempCart.forEach((item, index) => {
+            if (
+              item.goodsId === that.skuInfo.goodsId &&
+              item.productId === that.skuInfo.productId
+            ) {
+              that.skuInfo.number = item.number + that.shopNumber
+              isTrue = true
+              that.shopNumber = 1
+            }
+          })
+
+          if (isTrue) {
+            this.$store.commit('upCart', that.skuInfo)
+          } else {
+            that.skuInfo.number = that.shopNumber
+            this.$store.commit('addCart', that.skuInfo)
+          }
+          that.SaveOrderInfo()
+        }
+      }
+    },
+    SaveOrderInfo(){
+      const that = this
+      const c = res => {
+        that.$common.openWin('/pages/cart/confirm/main')
+      }
+      let arr = []
+      that.tempCart.forEach(item => {
+        if (item.isSelected) {
+          arr.push({
+            productId: item.productId,
+            goodsId: item.goodsId,
+            number: item.number
+          })
+        }
+      })
+      if (arr.length <= 0) {
+        console.log('---')
+        return
+      }
+      const param = {
+        cartList: JSON.stringify(arr)
+      }
+      SaveOrderInfoApi(arr).then(c)
+    },
     getGoodsDetails() {
       const that = this
       const c = res => {
@@ -183,9 +235,7 @@ export default {
           if (isTrue) {
             this.$store.commit('upCart', that.skuInfo)
           } else {
-            
             that.skuInfo.number = that.shopNumber
-            console.log('shopnum',  that.skuInfo)
             this.$store.commit('addCart', that.skuInfo)
           }
         }
@@ -400,8 +450,8 @@ export default {
 .isSelected {
   float: left;
   padding: 10px 15px;
-  background: @price-color;
   margin: 0 10px 10px 0;
+  background: #fa6d87;
   color: white;
 }
 .detailsPopup {

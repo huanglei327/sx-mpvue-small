@@ -90,6 +90,7 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import { SaveOrdersApi, GetGenerateOrderApi } from "@/utils/http/api.js";
+import { userInfo } from 'os';
 export default {
   data() {
     return {
@@ -113,6 +114,9 @@ export default {
       },
       max: state => {
         return state.max;
+      },
+      userInfo :state =>{
+        return state.userInfo
       }
     }),
     ...mapGetters({
@@ -145,8 +149,9 @@ export default {
       const c = res => {
           that.orderId = res.orderInfo.id;
           that.GetGenerateOrder(that.orderId);
+          this.$store.commit("delCart");
       };
-      that.adderssList.userName = "黄磊";
+      that.adderssList.userName = that.userInfo.nickName
       that.adderssList.isDefault = 0;
       delete that.adderssList.errMsg;
       const param = {

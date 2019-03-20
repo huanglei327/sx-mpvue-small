@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "确定下单",
+  "navigationBarTitleText": "填写订单",
   "usingComponents": {
     "van-cell": "../../../static/vant/cell/index",
     "van-cell-group": "../../../static/vant/cell-group/index",

@@ -96,12 +96,8 @@ const store = new Vuex.Store({
       })
       wx.setStorageSync('shopCart', JSON.stringify(state.ssxxCart))
     },
-    delCart(state, skuInfo) {
-      state.ssxxCart.forEach((item, index) => {
-        if (item.productId === skuInfo.productId && item.goodsId === skuInfo.goodsId) {
-          state.ssxxCart.splice(index, 1)
-        }
-      })
+    delCart(state) {
+      state.ssxxCart = []
       wx.setStorageSync('shopCart', JSON.stringify(state.ssxxCart))
     },
     addCart(state, skuInfo) {
