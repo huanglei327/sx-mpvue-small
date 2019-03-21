@@ -21,6 +21,7 @@
                     class="order-content"
                     v-for="(item,index) in ditem.orderGoodsList"
                     :key="index"
+                    @click="goOrderDetails(ditem)"
                   >
                     <view class="o-left">
                       <image :src="item.listPicUrl"/>
@@ -125,6 +126,10 @@ export default {
       this.pageNo = 1;
       this.isPaging = false;
       this.goOrder(event.mp.detail.title);
+    },
+    goOrderDetails(item){
+      console.log(item)
+      this.$common.openWin('/pages/user/odetails/main?orderId='+item.id)
     },
     goRefund(orderId) {
       const that = this;

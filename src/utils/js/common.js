@@ -206,7 +206,6 @@ export function userLogin() {
 
 
 export function GoPay(param) {
-  console.log('gopay')
   wx.requestPayment({
     timeStamp: param.timeStamp,
     nonceStr: param.nonceStr,
@@ -214,16 +213,10 @@ export function GoPay(param) {
     signType: 'MD5',
     paySign: param.paySign,
     success(res) {
-      openWin('/pages/cart/payment/main')
-      // wx.showToast({
-      //   title: '支付成功',
-      //   icon: 'success',
-      //   duration: 2000
-      // })
+      openWin('/pages/cart/payment/main?stateType=1&orderId=' + param.orderId)
     },
     fail(res) {
-      openWin('/pages/cart/payment/main')
-      console.log(res)
+      openWin('/pages/cart/payment/main?stateType=2&orderId=' + param.orderId)
     }
   })
 }

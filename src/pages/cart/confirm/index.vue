@@ -15,8 +15,8 @@
     </div>
     <div class="c-cut-off"></div>
     <div class="d-space"></div>
-    <div v-show="ssxxCart.length>0" style="width:100%;">
-      <div class="shop-cart" v-for="(item,index) in getShopCart" :key="index">
+    <div v-show="tempCart.length>0" style="width:100%;">
+      <div class="shop-cart" v-for="(item,index) in tempCart" :key="index">
         <div style="padding:10px 15px 0 15px;">
           <div class="shop-row">
             <div class="s-r-checkbox">
@@ -59,7 +59,7 @@
     </div>
     <div class="c-deta-list">
       <van-cell-group>
-        <van-cell  :value="'￥'+getCalculatePrice">
+        <van-cell  :value="'￥'+getCalculatePriceA">
           <view slot="title">
             <span class="van-cell-text">商品合计</span>
           </view>
@@ -69,6 +69,7 @@
     </div>
     <div class="vansub">
       <van-submit-bar
+
         custom-class="customClass"
         button-class="buttonClass"
         button-text="提交订单"
@@ -77,9 +78,9 @@
         <van-tag class="cart-vantag" type="primary">
           <div class="cart-sub">
             <div style="width:60%;">总价: ￥
-              <span class="s-price">{{getCalculatePrice}}</span>
+              <span class="s-price">{{getCalculatePriceA}}</span>
             </div>
-            <div class="color6">共 {{getValidCartNum}} 件商品</div>
+            <div class="color6">共 {{getValidCartNumA}} 件商品</div>
           </div>
         </van-tag>
       </van-submit-bar>
@@ -99,7 +100,11 @@ export default {
       userName: "",
       telNumber: "",
       adderssList: {},
-      orderId: 0
+      orderId: 0,
+      btnState:true,
+      tempCart :[],
+      getCalculatePriceA:0,
+      getValidCartNumA:0,
     };
   },
   computed: {
@@ -128,6 +133,9 @@ export default {
   methods: {
     onClickButton() {
       const that = this;
+      //如果是滑动回来的不允许点提交了
+      if(!that.btnState)
+        return
       if (that.userName === "") {
         wx.showToast({
           title: "请填写收货地址",
@@ -147,10 +155,16 @@ export default {
         }
       });
       const c = res => {
+        //页面只能点一次提交
+          that.btnState = false
           that.orderId = res.orderInfo.id;
           that.GetGenerateOrder(that.orderId);
-          this.$store.commit("delCart");
-      };
+          that.ssxxCart.forEach(item => {
+            if (item.isSelected) {
+               this.$store.commit("delCart",item);
+            }
+          })
+      }
       that.adderssList.userName = that.userInfo.nickName
       that.adderssList.isDefault = 0;
       delete that.adderssList.errMsg;
@@ -168,7 +182,8 @@ export default {
           paySign: res.paySign,
           package: res.package,
           nonceStr: res.nonceStr,
-          signType: res.signType
+          signType: res.signType,
+          orderId: orderId
         };
         that.$common.GoPay(param);
       };
@@ -200,7 +215,12 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted() {
+    const that = this
+    that.tempCart = that.ssxxCart
+    that.getCalculatePriceA = that.getCalculatePrice
+    that.getValidCartNumA = that.getValidCartNum
+  }
 };
 </script>
 

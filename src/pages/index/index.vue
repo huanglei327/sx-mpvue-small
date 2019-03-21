@@ -44,7 +44,7 @@
         >
           <div
             class="u-name"
-            @click="$common.openWin('/pages/commodity/index/main?classId=1008008')"
+            @click="$common.openWin('/pages/cart/payment/main')"
           > 更多</div>
           <div class="u-icon">
             <van-icon name="arrow" />
