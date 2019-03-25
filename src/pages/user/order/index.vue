@@ -128,7 +128,6 @@ export default {
       this.goOrder(event.mp.detail.title);
     },
     goOrderDetails(item){
-      console.log(item)
       this.$common.openWin('/pages/user/odetails/main?orderId='+item.id)
     },
     goRefund(orderId) {

@@ -134,8 +134,8 @@ export default {
     onClickButton() {
       const that = this;
       //如果是滑动回来的不允许点提交了
-      if(!that.btnState)
-        return
+      // if(!that.btnState)
+      //   return
       if (that.userName === "") {
         wx.showToast({
           title: "请填写收货地址",

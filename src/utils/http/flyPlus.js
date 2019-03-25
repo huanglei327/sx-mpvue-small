@@ -1,8 +1,8 @@
 import Fly from 'flyio/dist/npm/wx'
-import { showToast, redirectTo, getToken } from '../js/common.js'
+import { showToast, openWin, getToken } from '../js/common.js'
 const fly = new Fly()
 //const host = 'http://172.17.234.231'
-const host = 'https://duoduoday.top'
+ const host = 'https://duoduoday.top'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
   wx.showLoading({
@@ -46,7 +46,10 @@ fly.interceptors.response.use(
         showToast(response.data.errorMessage, 'none')
       }
       else if (code === '9') {
-        redirectTo('/pages/login/main')
+        openWin('/pages/login/main')
+        console.log(response)
+        console.log('-------------')
+        return response
       }
     }
   },
@@ -54,7 +57,7 @@ fly.interceptors.response.use(
     // 请求出错，根据返回状态码判断出错原因
     wx.hideLoading()
     if (err) {
-      redirectTo('/pages/utils/error/main')
+      openWin('/pages/utils/error/main')
       return '请求失败'
     };
   }

@@ -16,9 +16,9 @@
     </div>
     <div class="d-space"></div>
     <div class="order-list">
-       <div class="o-content2">
+      <div class="o-content2">
         <div class="left">订单状态 :</div>
-        <div class="right s-price">未付款</div>
+        <div class="right s-price">{{orderInfo.orderStatusText}}</div>
       </div>
       <div class="o-content">
         <div class="left">订单编号 :</div>
@@ -28,9 +28,17 @@
         <div class="left">下单时间 :</div>
         <div class="right">{{orderInfo.addTime}}</div>
       </div>
+      <div class="o-b-list" v-if="btnState == 1">
+        <span>
+          <van-button size="small">取消订单</van-button>
+        </span>
+        <span>
+          <van-button size="small" type="danger" @click="GetGenerateOrder(orderInfo.id)">付 款</van-button>
+        </span>
+      </div>
     </div>
     <div class="d-space"></div>
-    <div  style="width:100%;">
+    <div style="width:100%;">
       <div class="shop-cart" v-for="(item,index) in orderGoods" :key="index">
         <div style="padding:10px 15px 0 15px;">
           <div class="shop-row">
@@ -70,7 +78,7 @@
         <div class="left">商品合计 :</div>
         <div class="right">{{orderInfo.goodsPrice}}</div>
       </div>
-       <div class="o-content">
+      <div class="o-content">
         <div class="left">运费 :</div>
         <div class="right">0.00</div>
       </div>
@@ -83,13 +91,14 @@
 </template>
 
 <script>
-import { GetOrderDeatilsApi } from "@/utils/http/api.js";
+import { GetOrderDeatilsApi,GetGenerateOrderApi } from "@/utils/http/api.js";
 export default {
   data() {
     return {
       query: {},
       orderInfo: {},
-      orderGoods:[]
+      orderGoods: [],
+      btnState: 0
     };
   },
   mounted() {
@@ -103,13 +112,33 @@ export default {
       const that = this;
       const c = res => {
         that.orderInfo = res.orderInfo;
-        that.orderGoods = res.orderGoods
+        that.orderGoods = res.orderGoods;
+        if (res.orderInfo.orderStatus == "0") {
+          that.btnState = 1;
+        }
       };
       const param = {
         orderId: orderId
       };
       GetOrderDeatilsApi(param).then(c);
-    }
+    },
+    GetGenerateOrder(orderId) {
+      const that = this;
+      const c = res => {
+        let param = {
+          timeStamp: res.timeStamp,
+          paySign: res.paySign,
+          package: res.package,
+          nonceStr: res.nonceStr,
+          signType: res.signType
+        };
+        that.$common.GoPay(param);
+      };
+      const param = {
+        orderId: orderId
+      };
+      GetGenerateOrderApi(param).then(c);
+    },
   }
 };
 </script>
@@ -122,41 +151,51 @@ export default {
     padding-top: 5px;
   }
 }
-.order-list{
+.order-list {
   background: white;
   padding: 10px 0;
   width: 100%;
-  .o-c-s{
-    border-top:1px solid #f5f5f5;
-    padding:5px 0;
+  .o-c-s {
+    border-top: 1px solid #f5f5f5;
+    padding: 5px 0;
   }
-  .o-c-z{
+  .o-c-z {
     font-size: 14px;
     border-bottom: 1px solid #f5f5f5;
   }
-  .o-content2{
+  .o-b-list{
+    text-align: right;
+    margin-right: 15px;
+    border-top:1px solid #f5f5f5;
+    padding-top: 5px;
+    margin-top:5px;
+    span {
+      margin-left: 15px;
+    }
+  }
+  .o-content2 {
     height: 25px;
     line-height: 25px;
     display: flex;
     font-size: 12px;
-    margin-left:40rpx;
-    .left{
+    margin-left: 40rpx;
+    .left {
       width: 100px;
     }
-    .right{
+    .right {
       flex: 1;
     }
   }
-  .o-content{
+  .o-content {
     height: 25px;
     line-height: 25px;
     display: flex;
     font-size: 12px;
     padding: 0 20px;
-    .left{
+    .left {
       width: 100px;
     }
-    .right{
+    .right {
       flex: 1;
     }
   }

@@ -120,6 +120,7 @@ export function getToken() {
 
 export function getWxLogin(param) {
   const c = res => {
+    console.log(res)
     //插入token
     store.commit('saveToken', res.token)
     //插入用户信息
@@ -131,7 +132,7 @@ export function getWxLogin(param) {
     // var options = currentPage.options //如果要获取url中所带的参数可以查看options
     // console.log(options)
 
-    backBeaforWin()
+    //backBeaforWin()
   }
   getWxLoginApi(param).then(c)
 }
@@ -213,10 +214,14 @@ export function GoPay(param) {
     signType: 'MD5',
     paySign: param.paySign,
     success(res) {
-      openWin('/pages/cart/payment/main?stateType=1&orderId=' + param.orderId)
+      console.log(res)
+      redirectTo('/pages/cart/payment/main?stateType=1&orderId=' + param.orderId)
     },
     fail(res) {
-      openWin('/pages/cart/payment/main?stateType=2&orderId=' + param.orderId)
+      console.log(res)
+      console.log('----------')
+      if(param.isLink !== false)
+        redirectTo('/pages/cart/payment/main?stateType=2&orderId=' + param.orderId)
     }
   })
 }

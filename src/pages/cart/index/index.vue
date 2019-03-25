@@ -84,7 +84,6 @@ export default {
     })
   },
   methods: {
-    goIndex() {},
     checkChange(item) {
       const that = this
       item.isSelected = !item.isSelected
@@ -143,7 +142,8 @@ export default {
     btnSaveOrder() {
       const that = this
       const c = res => {
-        that.$common.openWin('/pages/cart/confirm/main')
+        if(!res.errorCode)
+          that.$common.openWin('/pages/cart/confirm/main')
       }
       let arr = []
       that.ssxxCart.forEach(item => {

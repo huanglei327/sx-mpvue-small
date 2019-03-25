@@ -1,15 +1,28 @@
 <template>
   <div style="width:100%;">
-    <div class="payment">
+    <div class="payment" v-if="query.stateType === 12">
       <div class="title">支付失败</div>
       <div class="remark">请在当天内完成付款</div>
       <div class="remark">否则订单会被系统取消</div>
       <div class="btnlist">
         <div>
-          <van-button size="small">查看订单</van-button>
+          <van-button size="small" @click="goOrderDetails()">查看订单</van-button>
         </div>
         <div>
-          <van-button size="small">重新支付</van-button>
+          <van-button size="small" @click="GetGenerateOrder()">重新支付</van-button>
+        </div>
+      </div>
+    </div>
+    <div class="payment"  v-else>
+      <div class="title">支付成功</div>
+      <div class="remark">请在当天内完成付款</div>
+      <div class="remark">否则订单会被系统取消</div>
+      <div class="btnlist">
+        <div>
+          <van-button size="small" @click="goOrderDetails()">查看订单</van-button>
+        </div>
+        <div>
+          <!-- <van-button size="small" @click="GetGenerateOrder()">重新支付</van-button> -->
         </div>
       </div>
     </div>
@@ -17,9 +30,38 @@
 </template>
 
 <script>
+import { GetOrderDeatilsApi } from "@/utils/http/api.js";
 export default {
   data() {
-    return {};
+    return {
+      query: {}
+    };
+  },
+  mounted() {
+     this.query = this.$common.getUrlPages();
+  },
+  methods: {
+    goOrderDetails() {
+      this.$common.openWin("/pages/user/odetails/main?orderId=" + this.query.orderId);
+    },
+     GetGenerateOrder() {
+      const that = this;
+      const c = res => {
+        let param = {
+          timeStamp: res.timeStamp,
+          paySign: res.paySign,
+          package: res.package,
+          nonceStr: res.nonceStr,
+          signType: res.signType,
+          isLink: false
+        };
+        that.$common.GoPay(param);
+      };
+      const param = {
+        orderId: that.query.orderId
+      };
+      GetGenerateOrderApi(param).then(c);
+    },
   }
 };
 </script>

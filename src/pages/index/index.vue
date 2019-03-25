@@ -54,7 +54,6 @@
       <div class="content">
         <div
           class="c-n-1"
-          @click="$common.openWin('/pages/commodity/index/main?goodsId=1181000')"
         >
           <div class="left">
             <image
