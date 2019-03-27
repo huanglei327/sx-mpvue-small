@@ -218,8 +218,7 @@ export default {
       const param = {
         jsCode: jsCode
       };
-      const c = res => {
-        console.log(res);
+      const c = res => {        
         this.$store.commit("saveToken", res);
       };
       getWxLoginApi(param).then(c);
@@ -233,7 +232,6 @@ export default {
       that.listPopularItems = listA.data.popularItems;
     }
   },
-
   created() {
     // 调用应用实例的方法获取全局数据
     //this.getUserInfo();
@@ -244,8 +242,6 @@ export default {
     //检测是否登陆是否有效
     that.$common.checkLogin();
     that.init();
-
-    
   }
 };
 </script>
