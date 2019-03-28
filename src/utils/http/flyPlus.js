@@ -1,8 +1,9 @@
 import Fly from 'flyio/dist/npm/wx'
 import { showToast, openWin, getToken } from '../js/common.js'
 const fly = new Fly()
-//const host = 'http://172.17.234.231'
- const host = 'https://duoduoday.top'
+const host = 'http://172.17.234.231'
+ //const host = 'https://duoduoday.top'
+ //const host ='http://127.0.0.1'
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
   wx.showLoading({

@@ -98,3 +98,8 @@ export function GoRefundApi(param){
   const apiName='/api/pay/refund'
   return post(apiName,param)
 }
+
+export function cancelOrder(param){
+  const apiName ='/api/order/cancelOrder'
+  return post(apiName,param)
+}
