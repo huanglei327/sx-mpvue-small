@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "首页",
+    "navigationBarTitleText": "三石商城",
     "usingComponents": {
       "van-button": "../../static/vant/button/index"
     }

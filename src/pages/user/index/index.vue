@@ -68,12 +68,12 @@
             icon="shop"
             is-link
           ></van-cell>
-          <van-cell
+          <!-- <van-cell
             title="意见反馈"
             @click="$common.openWin('/pages/user/feedback/main')"
             icon="shop"
             is-link
-          ></van-cell>
+          ></van-cell> -->
           <!-- <van-cell title="帮助中心" icon="shop" is-link></van-cell> -->
           <van-cell
             title="设置"

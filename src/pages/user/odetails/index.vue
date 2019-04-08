@@ -30,7 +30,7 @@
       </div>
       <div class="o-b-list" v-if="btnState == 1">
         <span>
-          <van-button size="small">取消订单</van-button>
+          <van-button size="small" @click="cancelOrder(orderInfo.id)">取消订单</van-button>
         </span>
         <span>
           <van-button size="small" type="danger" @click="GetGenerateOrder(orderInfo.id)">付 款</van-button>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { GetOrderDeatilsApi,GetGenerateOrderApi } from "@/utils/http/api.js";
+import { GetOrderDeatilsApi,GetGenerateOrderApi,cancelOrderApi } from "@/utils/http/api.js";
 export default {
   data() {
     return {
@@ -139,6 +139,20 @@ export default {
       };
       GetGenerateOrderApi(param).then(c);
     },
+    cancelOrder(orderId){
+      const that = this 
+      const c= res=>{
+        wx.showToast({
+          title: '订单取消成功',
+          icon: 'warn',
+          duration: 2000
+        })
+      }
+      const param = {
+        orderId : orderId
+      }
+      cancelOrderApi(param).then(c)
+    }
   }
 };
 </script>

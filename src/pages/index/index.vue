@@ -1,26 +1,10 @@
 <template>
   <div class="container">
     <div class="d-swiper">
-      <swiper
-        class="swiper"
-        indicator-dots="true"
-        autoplay="true"
-        interval="5000"
-        duration="1000"
-      >
-        <block
-          v-for="(item, index) in adList"
-          :index="index"
-          :key="index"
-        >
+      <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+        <block v-for="(item, index) in adList" :index="index" :key="index">
           <swiper-item>
-            <image
-              :src="item.imageUrl"
-              :lazy-load="true"
-              class="slide-image"
-              mode="aspectFill"
-              height="170"
-            />
+            <image :src="item.imageUrl" :lazy-load="true" class="slide-image" mode="aspectFill" />
           </swiper-item>
         </block>
       </swiper>
@@ -38,29 +22,17 @@
       </div> -->
       <div class="main-title">
         <div>人气推荐</div>
-        <div
-          class="right"
-          @click="goCommodity"
-        >
-          <div
-            class="u-name"
-            @click="$common.openWin('/pages/cart/payment/main')"
-          > 更多</div>
+        <div class="right" @click="goCommodity">
+          <div class="u-name" @click="$common.openWin('/pages/commodity/index/main?classId=1008002')"> 更多</div>
           <div class="u-icon">
             <van-icon name="arrow" />
           </div>
         </div>
       </div>
       <div class="content">
-        <div
-          class="c-n-1"
-        >
+        <div class="c-n-1">
           <div class="left">
-            <image
-            :lazy-load="true"
-              class="imgs"
-              src="https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png"
-            />
+            <image :lazy-load="true" class="imgs" src="https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png" />
           </div>
           <div class="right color6">
             <div class="p-t-20">
@@ -75,17 +47,9 @@
           </div>
         </div>
         <div class="c-n-1">
-          <div
-            class="brand"
-            v-for="(item,index) in hotGoodsList"
-            :key="index"
-            v-if="index<3"
-          >
-            <div
-              class="item"
-              @click="$common.openWin('/pages/commodity/details/main?goodsId=1181000')"
-            >
-              <image :src="item.listPicUrl" :lazy-load="true"/>
+          <div class="brand" v-for="(item,index) in hotGoodsList" :key="index" v-if="index<3">
+            <div class="item" @click="$common.openWin('/pages/commodity/details/main?goodsId=1181000')">
+              <image :src="item.listPicUrl" :lazy-load="true" />
               <div>
                 <div class="n-1">
                   <!-- <div>严选明星</div> -->
@@ -104,7 +68,7 @@
 </template>
 
 <script>
-import card from "@/components/card";
+import card from '@/components/card'
 import {
   GetUserInfoApi,
   GetA,
@@ -112,33 +76,33 @@ import {
   GetSwipetInfoApi,
   GetHotGoodsApi,
   getWxLoginApi
-} from "@/utils/http/api.js";
-import listA from "./list.json";
-import recommendList from "../../components/recommend.vue";
+} from '@/utils/http/api.js'
+import listA from './list.json'
+import recommendList from '../../components/recommend.vue'
 
 export default {
   data() {
     return {
-      motto: "Hello World",
+      motto: 'Hello World',
       iconType: [
-        "success",
-        "success_no_circle",
-        "info",
-        "warn",
-        "waiting",
-        "cancel",
-        "download",
-        "search",
-        "clear"
+        'success',
+        'success_no_circle',
+        'info',
+        'warn',
+        'waiting',
+        'cancel',
+        'download',
+        'search',
+        'clear'
       ],
       userInfo: {},
       list: [],
       show: false,
       listPopularItems: [],
       imgUrls: [
-        "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg",
-        "http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg",
-        "http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"
+        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
       ],
       indicatorDots: false,
       autoplay: false,
@@ -147,103 +111,107 @@ export default {
       recommendList: [],
       adList: [],
       hotGoodsList: []
-    };
+    }
   },
   components: {
     card,
     recommendList
   },
-
+  onTabItemTap() {
+    console.log('111111')
+  },
   methods: {
     init() {
-      this.GetSwipetInfo();
-      this.GetHotGoods();
+      this.GetSwipetInfo()
+      this.GetHotGoods()
     },
     GetHotGoods() {
-      const that = this;
+      const that = this
       const c = res => {
-        that.hotGoodsList = res.hotGoodsList;
-      };
-      const param = {};
-      GetHotGoodsApi(param).then(c);
+        that.hotGoodsList = res.hotGoodsList
+      }
+      const param = {}
+      GetHotGoodsApi(param).then(c)
     },
     GetRecommend() {
-      const that = this;
+      const that = this
       const c = res => {
-        that.recommendList = res.recList;
-      };
-      const param = {};
-      GetRecommendApi(param).then(c);
+        that.recommendList = res.recList
+      }
+      const param = {}
+      GetRecommendApi(param).then(c)
     },
     GetSwipetInfo() {
-      const that = this;
+      const that = this
       const c = res => {
-        that.adList = res.adList;
-      };
-      const param = {};
+        that.adList = res.adList
+      }
+      const param = {}
 
-      GetSwipetInfoApi(param).then(c);
+      GetSwipetInfoApi(param).then(c)
     },
     bindViewTap() {
-      const url = "../logs/main";
-      wx.navigateTo({ url });
+      const url = '../logs/main'
+      wx.navigateTo({ url })
     },
     showpoprp() {
       wx.showToast({
-        title: "新增购物车成功",
+        title: '新增购物车成功',
         duration: 2000
-      });
+      })
       // console.log(this.$store.state.cartNum)
     },
     onClose() {
-      this.show = !this.show;
+      this.show = !this.show
     },
     goCommodity() {
-      const url = "../commodity/index/main";
-      wx.navigateTo({ url });
+      const url = '../commodity/index/main'
+      wx.navigateTo({ url })
     },
     previewImage(imageValue) {
-      const that = this;
+      const that = this
       //that.$showPreviewImage(imageValue)
-      that.$common.showPreviewImage(imageValue);
-      let values = [];
-      values.push(imageValue);
+      that.$common.showPreviewImage(imageValue)
+      let values = []
+      values.push(imageValue)
       wx.previewImage({
         current: imageValue, // 当前显示图片的http链接
         urls: values // 需要预览的图片http链接列表
-      });
+      })
     },
     getWxLogin(jsCode) {
-      const that = this;
+      const that = this
       const param = {
         jsCode: jsCode
-      };
-      const c = res => {        
-        this.$store.commit("saveToken", res);
-      };
-      getWxLoginApi(param).then(c);
+      }
+      const c = res => {
+        this.$store.commit('saveToken', res)
+      }
+      getWxLoginApi(param).then(c)
     },
     clickHandle(msg, ev) {
-      console.log("clickHandle:", msg, ev);
+      console.log('clickHandle:', msg, ev)
     },
     getListInfo() {
-      const that = this;
-      that.list = listA.data;
-      that.listPopularItems = listA.data.popularItems;
+      const that = this
+      that.list = listA.data
+      that.listPopularItems = listA.data.popularItems
     }
   },
-  created() {
-    // 调用应用实例的方法获取全局数据
-    //this.getUserInfo();
+  onShareAppMessage(options) {
+    return {
+      title: '三石自营生活类,保健类产品!', //分享内容
+      path: '/pages/index/main', //分享地址
+      imageUrl: this.adList[1].imageUrl //分享图片
+    }
   },
-  
   mounted() {
-    const that = this;
+    const that = this
     //检测是否登陆是否有效
-    that.$common.checkLogin();
-    that.init();
+    that.$common.checkLogin()
+    that.init()
   }
-};
+}
 </script>
 
 <style scoped lang="less">
@@ -285,13 +253,12 @@ export default {
 .d-swiper {
   width: 100%;
   .swiper {
-      .slide-image {
-        height: 170px;
-        width: 100%;
-        border-radius: 5px;
-        display: block;
-      }
- 
+    height: 200px;
+    .slide-image {
+      max-height: 200px;
+      width: 100%;
+      display: block;
+    }
   }
 }
 .d-m {

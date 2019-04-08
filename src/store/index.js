@@ -161,6 +161,7 @@ function getSystemInfo() {
   wx.getSystemInfo({
     success(res) {
       obj = res
+      console.log(obj)
     }
   })
   return obj

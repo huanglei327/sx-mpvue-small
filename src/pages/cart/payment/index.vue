@@ -1,6 +1,6 @@
 <template>
   <div style="width:100%;">
-    <div class="payment" v-if="query.stateType === 12">
+    <div class="payment" v-if="query.stateType === '2'">
       <div class="title">支付失败</div>
       <div class="remark">请在当天内完成付款</div>
       <div class="remark">否则订单会被系统取消</div>
@@ -22,7 +22,7 @@
           <van-button size="small" @click="goOrderDetails()">查看订单</van-button>
         </div>
         <div>
-          <!-- <van-button size="small" @click="GetGenerateOrder()">重新支付</van-button> -->
+          <van-button size="small" @click="goHome()">回到首页</van-button>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { GetOrderDeatilsApi } from "@/utils/http/api.js";
+import { GetOrderDeatilsApi,GetGenerateOrderApi } from "@/utils/http/api.js";
 export default {
   data() {
     return {
@@ -39,10 +39,14 @@ export default {
   },
   mounted() {
      this.query = this.$common.getUrlPages();
+     console.log(this.query)
   },
   methods: {
     goOrderDetails() {
       this.$common.openWin("/pages/user/odetails/main?orderId=" + this.query.orderId);
+    },
+    goHome(){
+      this.$common.openWin("/pages/index/index/main");
     },
      GetGenerateOrder() {
       const that = this;

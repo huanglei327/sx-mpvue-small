@@ -99,7 +99,8 @@ export function GoRefundApi(param){
   return post(apiName,param)
 }
 
-export function cancelOrder(param){
+//取消订单
+export function cancelOrderApi(param){
   const apiName ='/api/order/cancelOrder'
   return post(apiName,param)
 }

@@ -2,20 +2,10 @@
 
   <div class="c-main">
     <div class="c-temp">为你推荐</div>
-    <div
-      class="c-content"
-      v-for="(item,index) in list"
-      :key="index"
-    >
-      <div
-        class="c-single"
-        @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)"
-      >
+    <div class="c-content" v-for="(item,index) in list" :key="index">
+      <div class="c-single" @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)">
         <div class="c-img">
-          <image
-            :src="item.listPicUrl"
-            mode="widthFix"
-          />
+          <image :src="item.listPicUrl" lazy-load="true" mode="scaleToFill" @load="imageLoad" />
 
         </div>
         <div class="c-name">{{item.name}}</div>
@@ -27,32 +17,35 @@
 </template>
 
 <script>
-import { GetRecommendApi } from "@/utils/http/api.js";
+import { GetRecommendApi } from '@/utils/http/api.js'
 export default {
   data() {
     return {
       list: []
-    };
+    }
   },
   created() {
-    console.log("createed");
-    this.GetRecommend();
+    console.log('createed')
+    this.GetRecommend()
   },
   methods: {
     GoDetails(item) {
-      const url = "../details/main?goodsId=" + item.id;
-      wx.navigateTo({ url });
+      const url = '../details/main?goodsId=' + item.id
+      wx.navigateTo({ url })
     },
     GetRecommend() {
-      const that = this;
+      const that = this
       const c = res => {
-        that.list = res.recList;
-      };
-      const param = {};
-      GetRecommendApi(param).then(c);
+        that.list = res.recList
+      }
+      const param = {}
+      GetRecommendApi(param).then(c)
+    },
+    imageLoad(ev) {
+      console.log(ev)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

@@ -26,7 +26,7 @@
           />
         </div>
         <div class="f-right">
-          <div class="f-name">{{item.name}}{{item.name}}{{item.name}}{{item.name}}</div>
+          <div class="f-name">{{item.name}}</div>
           <div class="f-biref color6">{{item.goodsBrief}}</div>
           <div class="f-price price-color">￥{{item.retailPrice}}</div>
         </div>

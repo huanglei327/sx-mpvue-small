@@ -214,12 +214,9 @@ export function GoPay(param) {
     signType: 'MD5',
     paySign: param.paySign,
     success(res) {
-      console.log(res)
       redirectTo('/pages/cart/payment/main?stateType=1&orderId=' + param.orderId)
     },
     fail(res) {
-      console.log(res)
-      console.log('----------')
       if(param.isLink !== false)
         redirectTo('/pages/cart/payment/main?stateType=2&orderId=' + param.orderId)
     }
