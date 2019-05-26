@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="d-space"></div>
-      <div class="u-c-list">
+      <div class="u-c-list" style="display:none;">
         <van-cell-group>
           <!-- <van-cell title="我的积分" icon="shop" is-link></van-cell> -->
           <van-cell

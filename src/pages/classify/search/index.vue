@@ -1,20 +1,7 @@
 <template>
   <div class="container">
     <div :style="{'height':systemInfo.windowHeight+'px;width:100%;background:white;'}">
-      <div class="s-search">
-        <van-search
-          :value="values"
-          @change='onChange'
-          placeholder="请输入搜索关键词"
-          use-action-slot
-          maxlength="20"
-        >
-          <view
-            slot="action"
-            @click="onclick"
-          >搜索</view>
-        </van-search>
-      </div>
+      
       <div class="search-content">
         <div class="main-title">
           <div>历史搜索</div>
@@ -92,6 +79,7 @@ export default {
 .s-search {
   width: 100%;
 }
+
 .search-content {
   width: 100%;
   background: white;
@@ -100,7 +88,7 @@ export default {
     padding: 10px;
     flex-wrap: wrap;
     flex-direction: row;
-    view {
+    div {
       padding: 4px 6px;
       padding: 8rpx 12rpx;
       background: #f5f5f5;

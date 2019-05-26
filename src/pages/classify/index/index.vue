@@ -8,7 +8,7 @@
     </div>
     <div class="right">
       <div v-for="(item,index) in list" :key="index" v-if="active===index" class="typeTree">
-        <div class="heand">
+        <div class="heand" v-show="item.prettyBannerUrl" >
           <image :src="item.prettyBannerUrl" width="100%" height="200" />
         </div>
         <div v-for="(c,indexc) in item.subCategoryList" :key="indexc" class="category">
