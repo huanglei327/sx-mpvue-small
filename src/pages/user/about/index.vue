@@ -17,11 +17,13 @@
         <div class="ab-left">公司名称</div>
         <div class="ab-right">惠(汇)韩参茸</div>
       </div>
-      <div class="ab-content">
+      <div class="ab-content"
+           @click="callPhoneA">
         <div class="ab-left">电话号码</div>
         <div class="ab-right">0752-7210339</div>
       </div>
-      <div class="ab-content">
+      <div class="ab-content"
+           @click="callPhone">
         <div class="ab-left">手机号码</div>
         <div class="ab-right">13059501888</div>
         <div class="ab-right-r price-color">
@@ -31,6 +33,10 @@
       <div class="ab-content">
         <div class="ab-left">微信号码</div>
         <div class="ab-right">wxid_w6hbg4lxk2i821</div>
+        <div class="ab-right-r price-color"
+             @click="copywex">
+          复制
+        </div>
       </div>
       <div class="ab-content">
         <div class="ab-left">店铺地址</div>
@@ -65,6 +71,31 @@ export default {
         value: '广东省惠州市城区环湖三路18号(方直广场)广东省惠州市城区环湖三路18号(方直广场)'
       }]
     }
+  },
+  methods: {
+    copywex () {
+      const that = this
+      wx.setClipboardData({
+        data: 'wxid_w6hbg4lxk2i821',
+        success (res) {
+          wx.getClipboardData({
+            success (res) {
+              that.$toast.success('复制成功');
+            }
+          })
+        }
+      })
+    },
+    callPhone (phoneNum) {
+      wx.makePhoneCall({
+        phoneNumber: '13059501888' //仅为示例，并非真实的电话号码
+      })
+    },
+    callPhoneA (phoneNum) {
+      wx.makePhoneCall({
+        phoneNumber: '0752-7210339' //仅为示例，并非真实的电话号码
+      })
+    }
   }
 }
 </script>
@@ -78,7 +109,7 @@ export default {
   .ab-content {
     position: relative;
     display: flex;
-    padding: 15rpx 0;
+    padding: 25rpx 0;
     .ab-left {
       width: 160rpx;
     }
