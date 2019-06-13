@@ -2,10 +2,16 @@
 
   <div class="c-main">
     <div class="c-temp">为你推荐</div>
-    <div class="c-content" v-for="(item,index) in list" :key="index">
-      <div class="c-single" @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)">
+    <div class="c-content"
+         v-for="(item,index) in list"
+         :key="index">
+      <div class="c-single"
+           @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)">
         <div class="c-img">
-          <image :src="item.listPicUrl" lazy-load="true" mode="scaleToFill" @load="imageLoad" />
+          <image :src="item.listPicUrl"
+                 lazy-load="true"
+                 mode="scaleToFill"
+                 @load="imageLoad" />
 
         </div>
         <div class="c-name">{{item.name}}</div>
@@ -19,21 +25,21 @@
 <script>
 import { GetRecommendApi } from '@/utils/http/api.js'
 export default {
-  data() {
+  data () {
     return {
       list: []
     }
   },
-  created() {
+  created () {
     console.log('createed')
     this.GetRecommend()
   },
   methods: {
-    GoDetails(item) {
+    GoDetails (item) {
       const url = '../details/main?goodsId=' + item.id
       wx.navigateTo({ url })
     },
-    GetRecommend() {
+    GetRecommend () {
       const that = this
       const c = res => {
         that.list = res.recList
@@ -41,7 +47,7 @@ export default {
       const param = {}
       GetRecommendApi(param).then(c)
     },
-    imageLoad(ev) {
+    imageLoad (ev) {
       console.log(ev)
     }
   }
@@ -71,7 +77,7 @@ export default {
         background: #f5f5f5;
         image {
           width: 100%;
-          height: 150px;
+          height: 350rpx;
         }
       }
       .c-name {

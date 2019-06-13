@@ -13,17 +13,13 @@
       </div>
     </div> -->
     <div class="f-main">
-      <div
-        class="f-content"
-        v-for="(item,index) in status.footpriintList"
-        :key="index"
-        @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)"
-      >
+      <div class="f-content"
+           v-for="(item,index) in status.footpriintList"
+           :key="index"
+           @click="$common.openWin('/pages/commodity/details/main?goodsId='+item.id)">
         <div class="f-left">
-          <image
-            :src="item.listPicUrl"
-            mode="widthFix"
-          />
+          <image :src="item.listPicUrl"
+                 class="f-img" />
         </div>
         <div class="f-right">
           <div class="f-name">{{item.name}}</div>
@@ -38,11 +34,11 @@
 <script>
 export default {
   props: ["status"],
-  created() {
+  created () {
     console.log("createed", this.status);
   },
   methods: {
-    GoDetails(item) {
+    GoDetails (item) {
       const url = "../details/main?goodsId=" + item.id;
       wx.navigateTo({ url });
     }
@@ -50,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .f-main {
   width: 100%;
   font-size: 12px;
@@ -63,8 +59,9 @@ export default {
     .f-left {
       width: 100px;
       height: 100px;
-      image {
-        width: 90px;
+      .f-img {
+        padding-top: 5px;
+        width: 100px;
         height: 90px;
       }
     }

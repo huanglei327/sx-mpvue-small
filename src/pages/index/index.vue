@@ -1,10 +1,20 @@
 <template>
   <div class="container">
     <div class="d-swiper">
-      <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-        <block v-for="(item, index) in adList" :index="index" :key="index">
+      <swiper class="banner"
+              indicator-dots="true"
+              autoplay="true"
+              interval="3000"
+              duration="1000">
+        <block v-for="(item, index) in adList"
+               :index="index"
+               :key="index">
           <swiper-item>
-            <image :src="item.imageUrl" :lazy-load="true" class="slide-image" mode="aspectFill" />
+            <image :src="item.imageUrl"
+                   :lazy-load="true"
+                   background-size="cover"
+                   mode="aspectFill" />
+
           </swiper-item>
         </block>
       </swiper>
@@ -20,7 +30,7 @@
           </van-col>
         </van-row>
       </div> -->
-      <div class="main-title">
+      <!-- <div class="main-title">
         <div>人气推荐</div>
         <div class="right" @click="goCommodity">
           <div class="u-name" @click="$common.openWin('/pages/commodity/index/main?classId=1008002')"> 更多</div>
@@ -28,16 +38,16 @@
             <van-icon name="arrow" />
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="content">
-        <div class="c-n-1">
+        <!-- <div class="c-n-1">
           <div class="left">
             <image :lazy-load="true" class="imgs" src="https://yanxuan.nosdn.127.net/52b9ee8f296cfd5f8157ac97c0874430.png" />
           </div>
           <div class="right color6">
             <div class="p-t-20">
               <div class="n-1">
-                <!-- <div>严选明星</div> -->
+                
                 <div>满赠</div>
               </div>
               <div class="n-2">升级款白鹅绒秋冬加厚......</div>
@@ -45,11 +55,16 @@
               <div class="n-4 price-color">￥1149</div>
             </div>
           </div>
-        </div>
+        </div>  -->
         <div class="c-n-1">
-          <div class="brand" v-for="(item,index) in hotGoodsList" :key="index" v-if="index<3">
-            <div class="item" @click="$common.openWin('/pages/commodity/details/main?goodsId=1181000')">
-              <image :src="item.listPicUrl" :lazy-load="true" />
+          <div class="brand"
+               v-for="(item,index) in hotGoodsList"
+               :key="index"
+               v-if="index<3">
+            <div class="item"
+                 @click="$common.openWin('/pages/commodity/details/main?goodsId=1181000')">
+              <image :src="item.listPicUrl"
+                     :lazy-load="true" />
               <div>
                 <div class="n-1">
                   <!-- <div>严选明星</div> -->
@@ -81,7 +96,7 @@ import listA from './list.json'
 import recommendList from '../../components/recommend.vue'
 
 export default {
-  data() {
+  data () {
     return {
       motto: 'Hello World',
       iconType: [
@@ -117,15 +132,26 @@ export default {
     card,
     recommendList
   },
-  onTabItemTap() {
+  onTabItemTap () {
     console.log('111111')
   },
+  onPullDownRefresh: function () {
+    const that = this
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete\
+      that.init()
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+  },
   methods: {
-    init() {
+    init () {
       this.GetSwipetInfo()
       this.GetHotGoods()
     },
-    GetHotGoods() {
+    GetHotGoods () {
       const that = this
       const c = res => {
         that.hotGoodsList = res.hotGoodsList
@@ -133,7 +159,7 @@ export default {
       const param = {}
       GetHotGoodsApi(param).then(c)
     },
-    GetRecommend() {
+    GetRecommend () {
       const that = this
       const c = res => {
         that.recommendList = res.recList
@@ -141,7 +167,7 @@ export default {
       const param = {}
       GetRecommendApi(param).then(c)
     },
-    GetSwipetInfo() {
+    GetSwipetInfo () {
       const that = this
       const c = res => {
         that.adList = res.adList
@@ -150,25 +176,25 @@ export default {
 
       GetSwipetInfoApi(param).then(c)
     },
-    bindViewTap() {
+    bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
     },
-    showpoprp() {
+    showpoprp () {
       wx.showToast({
         title: '新增购物车成功',
         duration: 2000
       })
       // console.log(this.$store.state.cartNum)
     },
-    onClose() {
+    onClose () {
       this.show = !this.show
     },
-    goCommodity() {
+    goCommodity () {
       const url = '../commodity/index/main'
       wx.navigateTo({ url })
     },
-    previewImage(imageValue) {
+    previewImage (imageValue) {
       const that = this
       //that.$showPreviewImage(imageValue)
       that.$common.showPreviewImage(imageValue)
@@ -179,7 +205,7 @@ export default {
         urls: values // 需要预览的图片http链接列表
       })
     },
-    getWxLogin(jsCode) {
+    getWxLogin (jsCode) {
       const that = this
       const param = {
         jsCode: jsCode
@@ -189,23 +215,23 @@ export default {
       }
       getWxLoginApi(param).then(c)
     },
-    clickHandle(msg, ev) {
+    clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
     },
-    getListInfo() {
+    getListInfo () {
       const that = this
       that.list = listA.data
       that.listPopularItems = listA.data.popularItems
     }
   },
-  onShareAppMessage(options) {
+  onShareAppMessage (options) {
     return {
       title: '三石自营生活类,保健类产品!', //分享内容
       path: '/pages/index/main', //分享地址
       imageUrl: this.adList[1].imageUrl //分享图片
     }
   },
-  mounted() {
+  mounted () {
     const that = this
     //检测是否登陆是否有效
     that.$common.checkLogin()
@@ -215,6 +241,15 @@ export default {
 </script>
 
 <style scoped lang="less">
+.banner {
+  width: 750rpx;
+  height: 417rpx;
+}
+
+.banner image {
+  width: 100%;
+  height: 417rpx;
+}
 .userinfo {
   display: flex;
   flex-direction: column;

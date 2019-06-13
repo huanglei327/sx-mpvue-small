@@ -2,7 +2,10 @@
   <div>
     <div class="o-l-m">
       <div class="o-l-t">
-        <van-tabs :active="active" @change="onChange" swipe-threshold="5" color="#fa6d87">
+        <van-tabs :active="active"
+                  @change="onChange"
+                  swipe-threshold="5"
+                  color="#fa6d87">
           <van-tab title="全部"></van-tab>
           <van-tab title="待付款"></van-tab>
           <van-tab title="待发货"></van-tab>
@@ -14,10 +17,16 @@
         <!-- <order-list :status='status'></order-list> -->
         <view v-show="status.isTrue">
           <view v-show="status.orList.length>0">
-            <view v-for="(ditem,dindex) in status.orList" :key="dindex">
-              <van-panel :title="'订单编号：'+ditem.orderSn" use-footer-slot custom-class="panelCust">
+            <view v-for="(ditem,dindex) in status.orList"
+                  :key="dindex">
+              <van-panel :title="'订单编号：'+ditem.orderSn"
+                         use-footer-slot
+                         custom-class="panelCust">
                 <view>
-                  <view class="order-content" v-for="(item,index) in ditem.orderGoodsList" :key="index" @click="goOrderDetails(ditem)">
+                  <view class="order-content"
+                        v-for="(item,index) in ditem.orderGoodsList"
+                        :key="index"
+                        @click="goOrderDetails(ditem)">
                     <view class="o-left">
                       <image :src="item.listPicUrl" />
                     </view>
@@ -37,20 +46,26 @@
                   <view class="o-foot">
                     <view class="o-price">应付:￥{{ditem.actualPrice}}</view>
                     <view class="o-btn">
-                      <div class="order-btn" v-if="ditem.orderStatus===0">
+                      <div class="order-btn"
+                           v-if="ditem.orderStatus===0">
                         <span>
-                          <van-button size="small" @click="cancelOrder(ditem.id)">取消订单</van-button>
+                          <van-button size="small"
+                                      @click="cancelOrder(ditem.id)">取消订单</van-button>
                         </span>
                         <span>
-                          <van-button size="small" type="danger" @click="GetGenerateOrder(ditem.id)">付 款</van-button>
+                          <van-button size="small"
+                                      type="danger"
+                                      @click="GetGenerateOrder(ditem.id)">付 款</van-button>
                         </span>
                       </div>
-                      <div class="order-btn" v-else>
+                      <div class="order-btn"
+                           v-else>
                         <span>
                           <!-- <van-button size="small">评价</van-button> -->
                         </span>
                         <span>
-                          <van-button size="small" @click="goRefund(ditem.id)">退款</van-button>
+                          <van-button size="small"
+                                      @click="goRefund(ditem.id)">退款</van-button>
                         </span>
                       </div>
                     </view>
@@ -86,7 +101,7 @@ import listFoot from '../../../components/listfoot.vue'
 import iconInfo from '../../../components/iconinfo.vue'
 
 export default {
-  data() {
+  data () {
     return {
       msg: '2234',
       active: 1,
@@ -111,7 +126,7 @@ export default {
     iconInfo
   },
   methods: {
-    onChange(event) {
+    onChange (event) {
       this.active = event.mp.detail.index
       this.status.isTrue = false
       //每次切换加载第一页
@@ -119,10 +134,10 @@ export default {
       this.isPaging = false
       this.goOrder(event.mp.detail.title)
     },
-    goOrderDetails(item) {
+    goOrderDetails (item) {
       this.$common.openWin('/pages/user/odetails/main?orderId=' + item.id)
     },
-    goRefund(orderId) {
+    goRefund (orderId) {
       const that = this
       const c = res => {
         console.log(res)
@@ -132,7 +147,7 @@ export default {
       }
       GoRefundApi(param).then(c)
     },
-    GetGenerateOrder(orderId) {
+    GetGenerateOrder (orderId) {
       const that = this
       const c = res => {
         let param = {
@@ -150,9 +165,9 @@ export default {
       }
       GetGenerateOrderApi(param).then(c)
     },
-    cancelOrder(orderId){
-      const that = this 
-      const c= res=>{
+    cancelOrder (orderId) {
+      const that = this
+      const c = res => {
         wx.showToast({
           title: '订单取消成功',
           icon: 'warn',
@@ -160,11 +175,11 @@ export default {
         })
       }
       const param = {
-        orderId : orderId
+        orderId: orderId
       }
       cancelOrderApi(param).then(c)
     },
-    goOrder(value) {
+    goOrder (value) {
       const that = this
       const c = res => {
         //如果返回数据小于一页得条数 就禁止上拉加载
@@ -203,7 +218,7 @@ export default {
       }
       GetOderListApi(param).then(c)
     },
-    getStatus(value) {
+    getStatus (value) {
       var temp = 0
       switch (value) {
         case '待付款':
@@ -224,7 +239,7 @@ export default {
       }
       return temp
     },
-    getIndexById(value) {
+    getIndexById (value) {
       var id = 0
       switch (value + '') {
         case '0':
@@ -242,26 +257,26 @@ export default {
       }
       return id
     },
-    _getRegisterInfo() {
+    _getRegisterInfo () {
       const that = this
       that.pageNo++
       that.isPaging = true
       that.goOrder()
     }
   },
-  onReachBottom: function() {
+  onReachBottom: function () {
     //执行上拉执行的功能
     if (this.foots.type === 1) {
       this._getRegisterInfo()
     }
   },
   // 停止下拉刷新
-  async onPullDownRefresh() {
+  async onPullDownRefresh () {
     // to doing..
     // 停止下拉刷新
     wx.stopPullDownRefresh()
   },
-  mounted() {
+  mounted () {
     this.obj = this.$common.getUrlPages()
     console.log(this.obj)
     this.active = this.getIndexById(this.getStatus(this.obj.type))

@@ -2,18 +2,30 @@
   <div class="section">
 
     <div class="left">
-      <div v-for="(item,index) in list" :key="index" @click="bindActive(index)" :class="active=== index ?'active' :''">
+      <div v-for="(item,index) in list"
+           :key="index"
+           @click="bindActive(index)"
+           :class="active=== index ?'active' :''">
         {{item.name}}
       </div>
     </div>
     <div class="right">
-      <div v-for="(item,index) in list" :key="index" v-if="active===index" class="typeTree">
-        <div class="heand" v-show="item.prettyBannerUrl" >
-          <image :src="item.prettyBannerUrl" width="100%" height="200" />
+      <div v-for="(item,index) in list"
+           :key="index"
+           v-if="active===index"
+           class="typeTree">
+        <div class="heand"
+             v-show="item.prettyBannerUrl">
+          <image :src="item.prettyBannerUrl"
+                 width="100%"
+                 height="200" />
         </div>
-        <div v-for="(c,indexc) in item.subCategoryList" :key="indexc" class="category">
+        <div v-for="(c,indexc) in item.subCategoryList"
+             :key="indexc"
+             class="category">
           <div class="brand">
-            <div class="item" @click="$common.openWin('/pages/commodity/index/main?classId='+c.id)">
+            <div class="item"
+                 @click="$common.openWin('/pages/commodity/index/main?classId='+c.id)">
               <image :src="c.prettyBannerUrl" />
               <div>{{c.name}}</div>
             </div>
@@ -29,31 +41,42 @@
 import { GetUserInfoApi, GetA, GetClassIfyInfoApi } from '@/utils/http/api.js'
 import classify from './classify.json'
 export default {
-  data() {
+  data () {
     return {
       motto: 'Hello World',
       active: 0,
       list: []
     }
   },
-
+  onPullDownRefresh: function () {
+    const that = this
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete\
+      that.getList()
+      that.GetClassIfyInfo()
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+  },
   methods: {
-    getList() {
+    getList () {
       const that = this
       for (let i = 0; i < 15; i++) {
         that.list.push(i)
       }
     },
-    bindActive(index) {
+    bindActive (index) {
       this.active = index
     },
-    onChange(event) {
+    onChange (event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,
         icon: 'none'
       })
     },
-    GetClassIfyInfo() {
+    GetClassIfyInfo () {
       const that = this
       const c = res => {
         that.list = res.categoryList
@@ -62,7 +85,7 @@ export default {
       GetClassIfyInfoApi(param).then(c)
     }
   },
-  mounted() {
+  mounted () {
     this.getList()
     this.GetClassIfyInfo()
   }
@@ -88,7 +111,7 @@ export default {
   font-size: 14px;
 }
 .left::before {
-  content: '';
+  content: "";
   position: absolute;
   background: #dcdcdc;
   right: 0;

@@ -15,7 +15,9 @@
     "pages/user/order/main",
     "pages/user/odetails/main",
     "pages/user/footprint/main",
+    "pages/user/about/main",
     "pages/user/feedback/main",
+    "pages/user/addmap/main",
     "pages/login/main",
     "pages/utils/error/main"
   ],
