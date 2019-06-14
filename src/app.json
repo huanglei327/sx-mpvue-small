@@ -69,5 +69,10 @@
     "van-tabs": "../static/vant/tabs/index",
     "van-cell": "../static/vant/cell/index",
     "van-cell-group": "../static/vant/cell-group/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }

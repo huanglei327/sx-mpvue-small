@@ -38,10 +38,10 @@
           复制
         </div>
       </div>
-      <div class="ab-content">
+      <div class="ab-content"
+           @click="showMap">
         <div class="ab-left">店铺地址</div>
-        <div class="ab-right"
-             @click="$common.openWin('/pages/user/addmap/main')">广东省惠州市城区环湖三路18号广东省惠州市城区环湖三路18号(方直广场)</div>
+        <div class="ab-right">广东省惠州市城区环湖三路18号广东省惠州市城区环湖三路18号(方直广场)</div>
         <div class="ab-right-r price-color">
           <van-icon name="location" />
         </div>
@@ -73,6 +73,19 @@ export default {
     }
   },
   methods: {
+    showMap () {
+      wx.getLocation({//获取当前经纬度
+        type: 'wgs84', //返回可以用于wx.openLocation的经纬度，官方提示bug: iOS 6.3.30 type 参数不生效，只会返回 wgs84 类型的坐标信息  
+        success: function (res) {
+          wx.openLocation({//​使用微信内置地图查看位置。
+            latitude: 23.066199,//要去的纬度-地址
+            longitude: 114.429833,//要去的经度-地址
+            name: "惠州市惠城区方直广场",
+            address: '惠州市惠城区方直广场'
+          })
+        }
+      })
+    },
     copywex () {
       const that = this
       wx.setClipboardData({
